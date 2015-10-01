@@ -2,17 +2,17 @@
 # encoding: utf-8
 
 require "rubygems"
-require "bunny"
+require "bunni"
 
 puts "=> Demonstrating alternate exchanges"
 puts
 
-conn = Bunny.new
+conn = Bunni.new
 conn.start
 
 ch   = conn.create_channel
-x1   = ch.fanout("bunny.examples.ae.exchange1", :auto_delete => true, :durable => false)
-x2   = ch.fanout("bunny.examples.ae.exchange2", :auto_delete => true, :durable => false, :arguments => {
+x1   = ch.fanout("bunni.examples.ae.exchange1", :auto_delete => true, :durable => false)
+x2   = ch.fanout("bunni.examples.ae.exchange2", :auto_delete => true, :durable => false, :arguments => {
                    "alternate-exchange" => x1.name
                  })
 q    = ch.queue("", :exclusive => true)

@@ -10,7 +10,7 @@ unless ENV["CI"]
       http_client.list_connections.each do |conn_info|
         begin
           http_client.close_connection(conn_info.name)
-        rescue Bunny::ConnectionForced
+        rescue Bunni::ConnectionForced
           # This is not a problem, but the specs intermittently believe it is.
         end
       end
@@ -20,7 +20,7 @@ unless ENV["CI"]
       sleep 1.5
     end
 
-    def with_open(c = Bunny.new(:network_recovery_interval => 0.2, :recover_from_connection_close => true), &block)
+    def with_open(c = Bunni.new(:network_recovery_interval => 0.2, :recover_from_connection_close => true), &block)
       begin
         c.start
         block.call(c)
@@ -29,7 +29,7 @@ unless ENV["CI"]
       end
     end
 
-    def with_open_multi_host( c = Bunny.new( :hosts => ["127.0.0.1", "localhost"],
+    def with_open_multi_host( c = Bunni.new( :hosts => ["127.0.0.1", "localhost"],
                                              :network_recovery_interval => 0.2,
                                              :recover_from_connection_close => true), &block)
       begin
@@ -40,7 +40,7 @@ unless ENV["CI"]
       end
     end
 
-    def with_open_multi_broken_host( c = Bunny.new( :hosts => ["broken", "127.0.0.1", "localhost"],
+    def with_open_multi_broken_host( c = Bunni.new( :hosts => ["broken", "127.0.0.1", "localhost"],
                                              :hosts_shuffle_strategy => Proc.new { |hosts| hosts }, # We do not shuffle for these tests so we always hit the broken host
                                              :network_recovery_interval => 0.2,
                                              :recover_from_connection_close => true), &block)
@@ -53,7 +53,7 @@ unless ENV["CI"]
     end
 
     def with_recovery_attempts_limited_to(attempts = 3, &block)
-      c = Bunny.new(:recover_from_connection_close => true, :network_recovery_interval => 0.2, :recovery_attempts => attempts)
+      c = Bunni.new(:recover_from_connection_close => true, :network_recovery_interval => 0.2, :recovery_attempts => attempts)
       begin
         c.start
         block.call(c)
@@ -234,7 +234,7 @@ unless ENV["CI"]
     it "recovers client-named queues" do
       with_open do |c|
         ch = c.create_channel
-        q  = ch.queue("bunny.tests.recovery.client-named#{rand}")
+        q  = ch.queue("bunni.tests.recovery.client-named#{rand}")
         close_all_connections!
         sleep 0.1
         expect(c).not_to be_open
@@ -281,7 +281,7 @@ unless ENV["CI"]
       with_open do |c|
         ch = c.create_channel
         x  = ch.fanout("amq.fanout")
-        x2 = ch.fanout("bunny.tests.recovery.fanout")
+        x2 = ch.fanout("bunni.tests.recovery.fanout")
         x2.bind(x)
         close_all_connections!
         sleep 0.1
@@ -385,7 +385,7 @@ unless ENV["CI"]
     it "tries to recover for a given number of attempts" do
       with_recovery_attempts_limited_to(2) do |c|
         close_all_connections!
-        expect(c).to receive(:start).exactly(2).times.and_raise(Bunny::TCPConnectionFailed.new("test"))
+        expect(c).to receive(:start).exactly(2).times.and_raise(Bunni::TCPConnectionFailed.new("test"))
 
         wait_for_recovery
       end

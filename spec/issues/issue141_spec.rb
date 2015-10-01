@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Registering 2nd exclusive consumer on queue" do
     before :all do
-    @connection = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    @connection = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     @connection.start
   end
 
@@ -27,7 +27,7 @@ describe "Registering 2nd exclusive consumer on queue" do
     expect do
       q2.subscribe(:exclusive => true) do |_, _, _|
       end
-    end.to raise_error(Bunny::AccessRefused)
+    end.to raise_error(Bunni::AccessRefused)
 
     expect(ch1).to be_open
     expect(ch2).to be_closed

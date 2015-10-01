@@ -2,12 +2,12 @@
 require "spec_helper"
 
 unless ENV["CI"]
-  require "bunny/concurrent/condition"
-  require "bunny/test_kit"
+  require "bunni/concurrent/condition"
+  require "bunni/test_kit"
 
   describe "Long running [relatively to heartbeat interval] consumer that never publishes" do
     before :all do
-      @connection = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed", :automatic_recovery => false, :heartbeat_interval => 6)
+      @connection = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed", :automatic_recovery => false, :heartbeat_interval => 6)
       @connection.start
     end
 
@@ -16,7 +16,7 @@ unless ENV["CI"]
     end
 
     let(:target) { 512 * 1024 * 1024 }
-    let(:queue)  { "bunny.stress.long_running_consumer.#{Time.now.to_i}" }
+    let(:queue)  { "bunni.stress.long_running_consumer.#{Time.now.to_i}" }
 
     let(:rate) { 50 }
     let(:s)    { 4.0 }
@@ -24,7 +24,7 @@ unless ENV["CI"]
 
 
     it "does not skip heartbeats" do
-      finished = Bunny::Concurrent::Condition.new
+      finished = Bunni::Concurrent::Condition.new
 
       ct = Thread.new do
         t  = 0
@@ -60,7 +60,7 @@ unless ENV["CI"]
             break if t >= target
 
             rate.times do |i|
-              msg = Bunny::TestKit.message_in_kb(96, 8192, i)
+              msg = Bunni::TestKit.message_in_kb(96, 8192, i)
               x.publish(msg)
               t += msg.bytesize
             end

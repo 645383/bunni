@@ -2,12 +2,12 @@
 # encoding: utf-8
 
 require "rubygems"
-require "bunny"
+require "bunni"
 
 puts "=> Headers exchange routing"
 puts
 
-conn = Bunny.new
+conn = Bunni.new
 conn.start
 
 ch   = conn.create_channel

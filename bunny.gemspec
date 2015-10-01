@@ -2,12 +2,12 @@
 # encoding: utf-8
 
 require "base64"
-require File.expand_path("../lib/bunny/version", __FILE__)
+require File.expand_path("../lib/bunni/version", __FILE__)
 
 Gem::Specification.new do |s|
-  s.name = "bunny"
-  s.version = Bunny::VERSION.dup
-  s.homepage = "http://rubybunny.info"
+  s.name = "bunni"
+  s.version = Bunni::VERSION.dup
+  s.homepage = "http://rubybunni.info"
   s.summary = "Popular easy to use Ruby client for RabbitMQ"
   s.description = "Easy to use, feature complete Ruby client for RabbitMQ 3.3 and later versions."
   s.license = "MIT"

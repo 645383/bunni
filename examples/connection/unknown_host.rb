@@ -6,11 +6,11 @@ Bundler.setup
 
 $:.unshift(File.expand_path("../../../lib", __FILE__))
 
-require 'bunny'
+require 'bunni'
 
 begin
-  conn = Bunny.new("amqp://guest:guest@aksjhdkajshdkj.example82737.com")
+  conn = Bunni.new("amqp://guest:guest@aksjhdkajshdkj.example82737.com")
   conn.start
-rescue Bunny::TCPConnectionFailed => e
+rescue Bunni::TCPConnectionFailed => e
   puts "Connection to #{conn.hostname} failed"
 end

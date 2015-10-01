@@ -2,19 +2,19 @@
 # encoding: utf-8
 
 require "rubygems"
-require "bunny"
+require "bunni"
 
 puts "=> Demonstrating consumer cancellation notification"
 puts
 
-conn = Bunny.new
+conn = Bunni.new
 conn.start
 
 ch   = conn.create_channel
 
-module Bunny
+module Bunni
   module Examples
-    class ExampleConsumer < Bunny::Consumer
+    class ExampleConsumer < Bunni::Consumer
       def cancelled?
         @cancelled
       end
@@ -28,7 +28,7 @@ module Bunny
 end
 
 q    = ch.queue("", :exclusive => true)
-c    = Bunny::Examples::ExampleConsumer.new(ch, q)
+c    = Bunni::Examples::ExampleConsumer.new(ch, q)
 q.subscribe_with(c)
 
 sleep 0.1

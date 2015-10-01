@@ -1,14 +1,14 @@
 require "spec_helper"
 
-describe Bunny::Queue, "#subscribe" do
+describe Bunni::Queue, "#subscribe" do
   let(:publisher_connection) do
-    c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     c.start
     c
   end
 
   let(:consumer_connection) do
-    c = Bunny.new(:user => "bunny_reader", :password => "reader_password", :vhost => "bunny_testbed")
+    c = Bunni.new(:user => "bunni_reader", :password => "reader_password", :vhost => "bunni_testbed")
     c.start
     c
   end
@@ -19,7 +19,7 @@ describe Bunny::Queue, "#subscribe" do
   end
 
   context "with automatic acknowledgement mode" do
-    let(:queue_name) { "bunny.basic_consume#{rand}" }
+    let(:queue_name) { "bunni.basic_consume#{rand}" }
 
     it "registers the consumer" do
       delivered_keys = []

@@ -1,8 +1,8 @@
 require "spec_helper"
-require "bunny/concurrent/synchronized_sorted_set"
+require "bunni/concurrent/synchronized_sorted_set"
 
 unless ENV["CI"]
-  describe Bunny::Concurrent::SynchronizedSortedSet do
+  describe Bunni::Concurrent::SynchronizedSortedSet do
     50.times do |i|
       it "provides the same API as SortedSet for key operations (take #{i})" do
         s = described_class.new
@@ -39,7 +39,7 @@ unless ENV["CI"]
         s.delete_if { |i| i == 1 }
         expect(s.length).to eq 6
       end
-      it "synchronizes common operations needed by Bunny (take #{i})" do
+      it "synchronizes common operations needed by Bunni (take #{i})" do
         s = described_class.new
         expect(s.length).to eq 0
 

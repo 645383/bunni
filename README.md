@@ -1,18 +1,18 @@
-# Bunny, a Ruby RabbitMQ Client
+# Bunni, a Ruby RabbitMQ Client
 
-Bunny is a RabbitMQ client that focuses on ease of use. It
+Bunni is a RabbitMQ client that focuses on ease of use. It
 is feature complete, supports all recent RabbitMQ features and does not
 have any heavyweight dependencies.
 
 
-## I Know What RabbitMQ and Bunny are, How Do I Get Started?
+## I Know What RabbitMQ and Bunni are, How Do I Get Started?
 
-[Right here](http://rubybunny.info/articles/getting_started.html)!
+[Right here](http://rubybunni.info/articles/getting_started.html)!
 
 
-## What is Bunny Good For?
+## What is Bunni Good For?
 
-One can use Bunny to make Ruby applications interoperate with other
+One can use Bunni to make Ruby applications interoperate with other
 applications (both built in Ruby and not). Complexity and size may vary from
 simple work queues to complex multi-stage data processing workflows that involve
 many applications built with all kinds of technologies.
@@ -46,26 +46,26 @@ Specific examples:
 
 ## Supported Ruby Versions
 
-Modern Bunny versions support
+Modern Bunni versions support
 
  * CRuby 2.2, 2.1, 2.0
 
-Bunny works sufficiently well on JRuby but there are known
+Bunni works sufficiently well on JRuby but there are known
 JRuby bugs in versions prior to JRuby 9000 that cause high CPU burn. JRuby users should
 use [March Hare](http://rubymarchhare.info).
 
-Bunny `1.7.x` was the last version to support CRuby 1.9.3 and 1.8.7
+Bunni `1.7.x` was the last version to support CRuby 1.9.3 and 1.8.7
 
 
 ## Supported RabbitMQ Versions
 
-Bunny `1.5.0` (including previews) and later versions only support RabbitMQ `3.3+`.
-Bunny `1.4.x` and earlier supports RabbitMQ 2.x and 3.x.
+Bunni `1.5.0` (including previews) and later versions only support RabbitMQ `3.3+`.
+Bunni `1.4.x` and earlier supports RabbitMQ 2.x and 3.x.
 
 
 ## Project Maturity
 
-Bunny is a mature library (started in early 2009) with
+Bunni is a mature library (started in early 2009) with
 a stable public API.
 
 
@@ -73,37 +73,37 @@ a stable public API.
 
 ### Most Recent Release
 
-[![Gem Version](https://badge.fury.io/rb/bunny.png)](http://badge.fury.io/rb/bunny)
+[![Gem Version](https://badge.fury.io/rb/bunni.png)](http://badge.fury.io/rb/bunni)
 
 ### With Rubygems
 
-To install Bunny with RubyGems:
+To install Bunni with RubyGems:
 
 ```
-gem install bunny
+gem install bunni
 ```
 
 ### Bundler Dependency
 
-To use Bunny in a project managed with Bundler:
+To use Bunni in a project managed with Bundler:
 
 ``` ruby
-gem "bunny", ">= 2.1.0"
+gem "bunni", ">= 2.1.0"
 ```
 
 
 ## Quick Start
 
 Below is a small snippet that demonstrates how to publish
-and synchronously consume ("pull API") messages with Bunny.
+and synchronously consume ("pull API") messages with Bunni.
 
-For a 15 minute tutorial using more practical examples, see [Getting Started with RabbitMQ and Ruby using Bunny](http://rubybunny.info/articles/getting_started.html).
+For a 15 minute tutorial using more practical examples, see [Getting Started with RabbitMQ and Ruby using Bunni](http://rubybunni.info/articles/getting_started.html).
 
 ``` ruby
-require "bunny"
+require "bunni"
 
 # Start a communication session with RabbitMQ
-conn = Bunny.new
+conn = Bunni.new
 conn.start
 
 # open a channel
@@ -129,32 +129,32 @@ conn.stop
 
 ### Getting Started
 
-For a 15 minute tutorial using more practical examples, see [Getting Started with RabbitMQ and Ruby using Bunny](http://rubybunny.info/articles/getting_started.html).
+For a 15 minute tutorial using more practical examples, see [Getting Started with RabbitMQ and Ruby using Bunni](http://rubybunni.info/articles/getting_started.html).
 
 ### Guides
 
-Other documentation guides are available at [rubybunny.info](http://rubybunny.info):
+Other documentation guides are available at [rubybunni.info](http://rubybunni.info):
 
- * [Queues and Consumers](http://rubybunny.info/articles/queues.html)
- * [Exchanges and Publishers](http://rubybunny.info/articles/exchanges.html)
+ * [Queues and Consumers](http://rubybunni.info/articles/queues.html)
+ * [Exchanges and Publishers](http://rubybunni.info/articles/exchanges.html)
  * [AMQP 0.9.1 Model Explained](http://www.rabbitmq.com/tutorials/amqp-concepts.html)
- * [Connecting to RabbitMQ](http://rubybunny.info/articles/connecting.html)
- * [Error Handling and Recovery](http://rubybunny.info/articles/error_handling.html)
- * [TLS/SSL Support](http://rubybunny.info/articles/tls.html)
- * [Bindings](http://rubybunny.info/articles/bindings.html)
- * [Using RabbitMQ Extensions with Bunny](http://rubybunny.info/articles/extensions.html)
- * [Durability and Related Matters](http://rubybunny.info/articles/durability.html)
+ * [Connecting to RabbitMQ](http://rubybunni.info/articles/connecting.html)
+ * [Error Handling and Recovery](http://rubybunni.info/articles/error_handling.html)
+ * [TLS/SSL Support](http://rubybunni.info/articles/tls.html)
+ * [Bindings](http://rubybunni.info/articles/bindings.html)
+ * [Using RabbitMQ Extensions with Bunni](http://rubybunni.info/articles/extensions.html)
+ * [Durability and Related Matters](http://rubybunni.info/articles/durability.html)
 
 ### API Reference
 
-[Bunny API Reference](http://reference.rubybunny.info/).
+[Bunni API Reference](http://reference.rubybunni.info/).
 
 
 ## Community and Getting Help
 
 ### Mailing List
 
-[Bunny has a mailing list](http://groups.google.com/group/ruby-amqp). We encourage you
+[Bunni has a mailing list](http://groups.google.com/group/ruby-amqp). We encourage you
 to also join the [RabbitMQ mailing list](https://groups.google.com/forum/#!forum/rabbitmq-users) mailing list. Feel free to ask any questions that you may have.
 
 
@@ -176,8 +176,8 @@ More detailed announcements can be found in the blogs
 
 If you find a bug, poor default, missing feature or find any part of
 the API inconvenient, please [file an
-issue](http://github.com/ruby-amqp/bunny/issues) on GitHub.  When
-filing an issue, please specify which Bunny and RabbitMQ versions you
+issue](http://github.com/ruby-amqp/bunni/issues) on GitHub.  When
+filing an issue, please specify which Bunni and RabbitMQ versions you
 are using, provide recent RabbitMQ log file contents if possible, and
 try to explain what behavior you expected and why. Bonus points for
 contributing failing test cases.
@@ -191,12 +191,12 @@ as long as it has a suitable TLS keys configuration and management plugin enable
 Make sure you have a recent version of RabbitMQ (> `3.5.3`).
 
 You can also start a clean RabbitMQ server
-node on your machine specifically for the bunny specs.
+node on your machine specifically for the bunni specs.
 To do so, run the following command
 from the base directory of the gem:
 
 ```
-RABBITMQ_NODENAME=bunny RABBITMQ_CONFIG_FILE=./spec/config/rabbitmq RABBITMQ_ENABLED_PLUGINS_FILE=./spec/config/enabled_plugins rabbitmq-server
+RABBITMQ_NODENAME=bunni RABBITMQ_CONFIG_FILE=./spec/config/rabbitmq RABBITMQ_ENABLED_PLUGINS_FILE=./spec/config/enabled_plugins rabbitmq-server
 ```
 
 The specs use the RabbitMQ management plugin and require a TLS port to be available. The config files in the spec/config directory enable these.
@@ -204,13 +204,13 @@ The specs use the RabbitMQ management plugin and require a TLS port to be availa
 Next up you'll need to prepare your node for the specs (just once):
 
 ```
-RABBITMQ_NODENAME=bunny ./bin/ci/before_build
+RABBITMQ_NODENAME=bunni ./bin/ci/before_build
 ```
 
 And then run the core integration suite:
 
 ```
-RABBITMQ_NODENAME=bunny CI=true rspec
+RABBITMQ_NODENAME=bunni CI=true rspec
 ```
 
 ## Other Ruby RabbitMQ Clients

@@ -1,9 +1,9 @@
 require "spec_helper"
 require "set"
 
-describe Bunny::Queue, "#subscribe" do
+describe Bunni::Queue, "#subscribe" do
   let(:connection) do
-    c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     c.start
     c
   end
@@ -13,7 +13,7 @@ describe Bunny::Queue, "#subscribe" do
   end
 
   context "with automatic acknowledgement mode" do
-    let(:queue_name) { "bunny.basic_consume#{rand}" }
+    let(:queue_name) { "bunni.basic_consume#{rand}" }
 
     it "registers the consumer" do
       delivered_keys = []
@@ -44,7 +44,7 @@ describe Bunny::Queue, "#subscribe" do
     end
 
     context "with a single consumer" do
-      let(:queue_name) { "bunny.basic_consume#{rand}" }
+      let(:queue_name) { "bunni.basic_consume#{rand}" }
 
       it "provides delivery tag access" do
         delivery_tags = SortedSet.new
@@ -73,7 +73,7 @@ describe Bunny::Queue, "#subscribe" do
 
 
     context "with multiple consumers on the same channel" do
-      let(:queue_name) { "bunny.basic_consume#{rand}" }
+      let(:queue_name) { "bunni.basic_consume#{rand}" }
 
       it "provides delivery tag access" do
         delivery_tags = SortedSet.new
@@ -105,7 +105,7 @@ describe Bunny::Queue, "#subscribe" do
   end
 
   context "with manual acknowledgement mode" do
-    let(:queue_name) { "bunny.basic_consume#{rand}" }
+    let(:queue_name) { "bunni.basic_consume#{rand}" }
 
     it "register a consumer with manual acknowledgements mode" do
       delivered_keys = []
@@ -140,7 +140,7 @@ describe Bunny::Queue, "#subscribe" do
 
   ENV.fetch("RUNS", 20).to_i.times do |i|
     context "with a queue that already has messages (take #{i})" do
-      let(:queue_name) { "bunny.basic_consume#{rand}" }
+      let(:queue_name) { "bunni.basic_consume#{rand}" }
 
       it "registers the consumer" do
         delivered_keys = []
@@ -179,7 +179,7 @@ describe Bunny::Queue, "#subscribe" do
 
 
   context "after consumer pool has already been shut down" do
-    let(:queue_name) { "bunny.basic_consume#{rand}" }
+    let(:queue_name) { "bunni.basic_consume#{rand}" }
 
     it "registers the consumer" do
       delivered_keys = []
@@ -225,7 +225,7 @@ describe Bunny::Queue, "#subscribe" do
 
   context "with uncaught exceptions in delivery handler" do
     context "and defined exception handler" do
-      let(:queue_name) { "bunny.basic_consume#{rand}" }
+      let(:queue_name) { "bunni.basic_consume#{rand}" }
 
       it "uses exception handler" do
         caught = nil
@@ -257,7 +257,7 @@ describe Bunny::Queue, "#subscribe" do
 
 
     context "and default exception handler" do
-      let(:queue_name) { "bunny.basic_consume#{rand}" }
+      let(:queue_name) { "bunni.basic_consume#{rand}" }
 
       it "uses exception handler" do
         t = Thread.new do
@@ -282,7 +282,7 @@ describe Bunny::Queue, "#subscribe" do
 
 
     context "with a single consumer" do
-      let(:queue_name) { "bunny.basic_consume#{rand}" }
+      let(:queue_name) { "bunni.basic_consume#{rand}" }
 
       it "provides delivery tag access" do
         delivery_tags = SortedSet.new
@@ -311,7 +311,7 @@ describe Bunny::Queue, "#subscribe" do
 
 
     context "with multiple consumers on the same channel" do
-      let(:queue_name) { "bunny.basic_consume#{rand}" }
+      let(:queue_name) { "bunni.basic_consume#{rand}" }
 
       it "provides delivery tag access" do
         delivery_tags = SortedSet.new

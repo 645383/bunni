@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Bunny::Queue, "#pop" do
+describe Bunni::Queue, "#pop" do
   let(:connection) do
-    c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed",
+    c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed",
                   :automatically_recover => false)
     c.start
     c
@@ -24,11 +24,11 @@ describe Bunny::Queue, "#pop" do
 
       sleep(0.5)
       get_ok, properties, content = q.pop
-      expect(get_ok).to be_kind_of(Bunny::GetResponse)
-      expect(properties).to be_kind_of(Bunny::MessageProperties)
+      expect(get_ok).to be_kind_of(Bunni::GetResponse)
+      expect(properties).to be_kind_of(Bunni::MessageProperties)
       expect(properties.content_type).to eq("application/octet-stream")
       expect(get_ok.routing_key).to eq(q.name)
-      expect(get_ok.delivery_tag).to be_kind_of(Bunny::VersionedDeliveryTag)
+      expect(get_ok.delivery_tag).to be_kind_of(Bunni::VersionedDeliveryTag)
       expect(content).to eq(msg)
       expect(q.message_count).to eq 0
 

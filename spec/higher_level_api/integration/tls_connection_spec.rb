@@ -33,9 +33,9 @@ unless ENV["CI"]
 
   describe "TLS connection to RabbitMQ with client certificates" do
     let(:connection) do
-      c = Bunny.new(:user     => "bunny_gem",
-        :password => "bunny_password",
-        :vhost    => "bunny_testbed",
+      c = Bunni.new(:user     => "bunni_gem",
+        :password => "bunni_password",
+        :vhost    => "bunni_testbed",
         :tls                   => true,
         :tls_cert              => "spec/tls/client_cert.pem",
         :tls_key               => "spec/tls/client_key.pem",
@@ -55,9 +55,9 @@ unless ENV["CI"]
 
   describe "TLS connection to RabbitMQ without client certificates" do
     let(:connection) do
-      c = Bunny.new(:user     => "bunny_gem",
-        :password => "bunny_password",
-        :vhost    => "bunny_testbed",
+      c = Bunni.new(:user     => "bunni_gem",
+        :password => "bunni_password",
+        :vhost    => "bunni_testbed",
         :tls                   => true,
         :tls_ca_certificates   => ["./spec/tls/cacert.pem"],
         :verify_peer           => false)
@@ -75,7 +75,7 @@ unless ENV["CI"]
 
   describe "TLS connection to RabbitMQ with a connection string" do
     let(:connection) do
-      c = Bunny.new("amqps://bunny_gem:bunny_password@127.0.0.1/bunny_testbed",
+      c = Bunni.new("amqps://bunni_gem:bunni_password@127.0.0.1/bunni_testbed",
         :tls_cert              => "spec/tls/client_cert.pem",
         :tls_key               => "spec/tls/client_key.pem",
         :tls_ca_certificates   => ["./spec/tls/cacert.pem"],
@@ -94,7 +94,7 @@ unless ENV["CI"]
 
   describe "TLS connection to RabbitMQ with a connection string and w/o client certificate and key" do
     let(:connection) do
-      c = Bunny.new("amqps://bunny_gem:bunny_password@127.0.0.1/bunny_testbed",
+      c = Bunni.new("amqps://bunni_gem:bunni_password@127.0.0.1/bunni_testbed",
         :tls_ca_certificates   => ["./spec/tls/cacert.pem"],
         :verify_peer           => false)
       c.start
@@ -111,9 +111,9 @@ unless ENV["CI"]
 
   describe "TLS connection to RabbitMQ with client certificates provided inline" do
     let(:connection) do
-      c = Bunny.new(:user    => "bunny_gem",
-        :password            => "bunny_password",
-        :vhost               => "bunny_testbed",
+      c = Bunni.new(:user    => "bunni_gem",
+        :password            => "bunni_password",
+        :vhost               => "bunni_testbed",
         :tls                 => true,
         :tls_cert            => File.read("./spec/tls/client_cert.pem"),
         :tls_key             => File.read("./spec/tls/client_key.pem"),
@@ -132,9 +132,9 @@ unless ENV["CI"]
 
   describe "TLS connection to RabbitMQ with tls_version TLSv1 specified" do
     let(:connection) do
-      c = Bunny.new(:user    => "bunny_gem",
-        :password            => "bunny_password",
-        :vhost               => "bunny_testbed",
+      c = Bunni.new(:user    => "bunni_gem",
+        :password            => "bunni_password",
+        :vhost               => "bunni_testbed",
         :tls                 => true,
         :tls_protocol        => :TLSv1,
         :tls_ca_certificates => ["./spec/tls/cacert.pem"],

@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Bunny::Channel, "#tx_commit" do
+describe Bunni::Channel, "#tx_commit" do
   let(:connection) do
-    c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     c.start
     c
   end

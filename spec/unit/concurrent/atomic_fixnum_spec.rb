@@ -1,7 +1,7 @@
 require "spec_helper"
-require "bunny/concurrent/atomic_fixnum"
+require "bunni/concurrent/atomic_fixnum"
 
-describe Bunny::Concurrent::AtomicFixnum do
+describe Bunni::Concurrent::AtomicFixnum do
   it "allows retrieving the current value" do
     af = described_class.new(0)
 

@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Bunny::Channel do
+describe Bunni::Channel do
   let(:connection) do
-    c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     c.start
     c
   end
@@ -42,7 +42,7 @@ describe Bunny::Channel do
 
 
   context "with explicit consumer construction" do
-    class ExampleConsumer < Bunny::Consumer
+    class ExampleConsumer < Bunni::Consumer
       def cancelled?
         @cancelled
       end
@@ -84,7 +84,7 @@ describe Bunny::Channel do
 
 
   context "with consumer re-registration" do
-    class ExampleConsumerThatReregisters < Bunny::Consumer
+    class ExampleConsumerThatReregisters < Bunni::Consumer
       def handle_cancellation(_)
         @queue = @channel.queue("basic.consume.after_cancellation", :auto_delete => true)
         @channel.basic_consume_with(self)

@@ -6,9 +6,9 @@ Bundler.setup
 
 $:.unshift(File.expand_path("../../../lib", __FILE__))
 
-require 'Bunny'
+require 'Bunni'
 
-conn = Bunny.new(:heartbeat_interval => 8)
+conn = Bunni.new(:heartbeat_interval => 8)
 conn.start
 
 ch0 = conn.create_channel

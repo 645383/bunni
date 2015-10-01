@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Bunny::Exchange, "#delete" do
+describe Bunni::Exchange, "#delete" do
   let(:connection) do
-    c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     c.start
     c
   end
@@ -15,7 +15,7 @@ describe Bunny::Exchange, "#delete" do
   context "with a name of an existing exchange" do
     it "deletes that exchange" do
       ch = connection.create_channel
-      x  = ch.fanout("bunny.tests.exchanges.fanout#{rand}")
+      x  = ch.fanout("bunni.tests.exchanges.fanout#{rand}")
 
       x.delete
       # no exception as of RabbitMQ 3.2. MK.

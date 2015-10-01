@@ -6,12 +6,12 @@ Bundler.setup
 
 $:.unshift(File.expand_path("../../../lib", __FILE__))
 
-require 'bunny'
+require 'bunni'
 
-HIGH_PRIORITY_Q = "bunny.examples.priority.hilo.high"
-LOW_PRIORITY_Q  = "bunny.examples.priority.hilo.low"
+HIGH_PRIORITY_Q = "bunni.examples.priority.hilo.high"
+LOW_PRIORITY_Q  = "bunni.examples.priority.hilo.low"
 
-conn = Bunny.new(:heartbeat_interval => 8)
+conn = Bunni.new(:heartbeat_interval => 8)
 conn.start
 
 ch1  = conn.create_channel

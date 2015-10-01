@@ -4,7 +4,7 @@ require "spec_helper"
 unless ENV["CI"]
   describe "Concurrent consumers sharing a connection" do
     before :all do
-      @connection = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed",
+      @connection = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed",
                     :automatic_recovery => false, :continuation_timeout => 6000)
       @connection.start
     end
@@ -26,7 +26,7 @@ unless ENV["CI"]
       it "successfully drain all queues" do
         ch   = @connection.create_channel
         body = "абвг"
-        x    = ch.topic("bunny.stress.concurrent.consumers.topic", :durable => true)
+        x    = ch.topic("bunni.stress.concurrent.consumers.topic", :durable => true)
 
         chs  = {}
         n.times do |i|

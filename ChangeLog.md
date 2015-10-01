@@ -1,4 +1,4 @@
-## Changes between Bunny 2.1.0 and 2.2.0
+## Changes between Bunni 2.1.0 and 2.2.0
 
 ### Add :addresses to connect options
 
@@ -10,7 +10,7 @@ Contributed by Bart van Zon (Tele2).
 
 ### Recover from connection.close by default
 
-Bunny will now try to reconnect also when server sent connection.close is
+Bunni will now try to reconnect also when server sent connection.close is
 received, e.g. when a server is restarting (but also when the connection is
 force closed by the server). This is in-line with how many other clients behave.
 The old default was `recover_from_connection_close: false`.
@@ -18,10 +18,10 @@ The old default was `recover_from_connection_close: false`.
 Contributed by Carl Hörberg (CloudAMQP).
 
 
-## Changes between Bunny 2.0.0 and 2.1.0
+## Changes between Bunni 2.0.0 and 2.1.0
 
-Bunny 2.1.0 has an **important breaking change**. It is highly
-advised that 2.1.0 is not mixed with earlier versions of Bunny
+Bunni 2.1.0 has an **important breaking change**. It is highly
+advised that 2.1.0 is not mixed with earlier versions of Bunni
 in case your applications include **integers in message headers**.
 
 ### Integer Value Serialisation in Headers
@@ -31,43 +31,43 @@ they were serialised as 32-bit unsigned integers, causing both underflows
 and overflows: incorrect values were observed by consumers.
 
 It is highly
-advised that 2.1.0 is not mixed with earlier versions of Bunny
+advised that 2.1.0 is not mixed with earlier versions of Bunni
 in case your applications include integers in message headers.
 
-If that's not the case, Bunny 2.1 will integeroperate with any earlier version
+If that's not the case, Bunni 2.1 will integeroperate with any earlier version
 starting with 0.9.0 just fine. Popular clients in other languages
-(e.g. Java and .NET) will interoperate with Bunny 2.1.0 without
+(e.g. Java and .NET) will interoperate with Bunni 2.1.0 without
 issues.
 
 
 ### Explicit Ruby 2.0 Requirement
 
-Bunny now requires Ruby 2.0 in the gemspec.
+Bunni now requires Ruby 2.0 in the gemspec.
 
 Contributed by Carl Hörberg.
 
 ### JRuby Fix
 
-Bunny runs again on JRuby. Note that
+Bunni runs again on JRuby. Note that
 JRuby users are strongly advised to use March Hare instead.
 
 Contributed by Teodor Pripoae.
 
 
 
-## Changes between Bunny 1.7.0 and 2.0.0
+## Changes between Bunni 1.7.0 and 2.0.0
 
-Bunny `2.0` doesn't have any breaking API changes
+Bunni `2.0` doesn't have any breaking API changes
 but drops Ruby 1.8 and 1.9 (both EOL'ed) support,
 hence the version.
 
 ### Minimum Required Ruby Version is 2.0
 
-Bunny `2.0` requires Ruby 2.0 or later.
+Bunni `2.0` requires Ruby 2.0 or later.
 
 ## Non-Blocking Writes
 
-Bunny now uses non-blocking socket writes, uses a reduced
+Bunni now uses non-blocking socket writes, uses a reduced
 number of writes for message publishing (frames are batched
 into a single write), and handles TCP back pressure from
 RabbitMQ better.
@@ -76,7 +76,7 @@ Contributed by Irina Bednova and Michael Klishin.
 
 ### Reduced Timeout Use
 
-`Bunny::ContinuationQueue#poll` no longer relies on Ruby's `Timeout` which has
+`Bunni::ContinuationQueue#poll` no longer relies on Ruby's `Timeout` which has
 numerous issues, including starting a new "interruptor" thread per operation,
 which is far from efficient.
 
@@ -85,14 +85,14 @@ Contributed by Joe Eli McIlvain and Carl Hörberg.
 ### Capped Number of Connection Recovery Attempts
 
 `:recovery_attempts` is a new option that limits the number of
-connection recovery attempts performed by Bunny. `nil` means
+connection recovery attempts performed by Bunni. `nil` means
 "no limit".
 
 Contributed by Irina Bednova.
 
-### Bunny::Channel#basic_ack and Related Methods Improvements
+### Bunni::Channel#basic_ack and Related Methods Improvements
 
-`Bunny::Channel#basic_ack`, `Bunny::Channel#basic_nack`, and `Bunny::Channel#basic_reject`
+`Bunni::Channel#basic_ack`, `Bunni::Channel#basic_nack`, and `Bunni::Channel#basic_reject`
 now adjust delivery tags between connection recoveries, as well as have a default value for
 the second argument.
 
@@ -109,25 +109,25 @@ Contributed by Justin Carter.
 ### prefetch_count is Limited to 65535
 
 Since `basic.qos`'s `prefetch_count` field is of type `short` in the protocol,
-Bunny must enforce its maximum allowed value to `2^16 - 1` to avoid
+Bunni must enforce its maximum allowed value to `2^16 - 1` to avoid
 confusing issues due to overflow.
 
 ### Per-Consumer and Per-Channel Prefetch
 
 Recent RabbitMQ versions support `basic.qos` `global` flag, controlling whether
-`prefetch` applies per-consumer or per-channel. Bunny `Channel#prefetch` now
+`prefetch` applies per-consumer or per-channel. Bunni `Channel#prefetch` now
 allows flag to be set as optional parameter, with the same default behaviour as
 before (per-consumer).
 
 Contributed by tiredpixel.
 
 
-## Changes between Bunny 1.6.0 and 1.7.0
+## Changes between Bunni 1.6.0 and 1.7.0
 
 ### TLS Peer Verification Enabled by Default
 
 When using TLS, peer verification is now enabled by default.
-It is still possible to [disable verification](http://rubybunny.info/articles/tls.html), e.g. for convenient
+It is still possible to [disable verification](http://rubybunni.info/articles/tls.html), e.g. for convenient
 development locally.
 
 Peer verification is a means of protection against man-in-the-middle attacks
@@ -151,26 +151,26 @@ Contributed by Yury Batenko.
 
 ### Socket Read Timeout No Longer Set to 0 With Disabled Heartbeats
 
-GH issue: [#267](https://github.com/ruby-amqp/bunny/pull/267).
+GH issue: [#267](https://github.com/ruby-amqp/bunni/pull/267).
 
 
 ### JRuby Writes Fixes
 
-On JRuby, Bunny reverts back to using plain old `write(2)` for writes. The CRuby implementation
+On JRuby, Bunni reverts back to using plain old `write(2)` for writes. The CRuby implementation
 on JRuby suffers from I/O incompatibilities. Until JRuby
 
-Bunny users who run on JRuby are highly recommended to switch to [March Hare](http://rubymarchhare.info),
+Bunni users who run on JRuby are highly recommended to switch to [March Hare](http://rubymarchhare.info),
 which has nearly identical API and is significantly more efficient.
 
 
-### Bunny::Session#with_channel Synchornisation Improvements
+### Bunni::Session#with_channel Synchornisation Improvements
 
-`Bunny::Session#with_channel` is now fully synchronised and won't run into `COMMAND_INVALID` errors
+`Bunni::Session#with_channel` is now fully synchronised and won't run into `COMMAND_INVALID` errors
 when used from multiple threads that share a connection.
 
 
 
-## Changes between Bunny 1.5.0 and 1.6.0
+## Changes between Bunni 1.5.0 and 1.6.0
 
 ### TLSv1 by Default
 
@@ -181,18 +181,18 @@ Contributed by Michael Klishin (Pivotal) and Justin Powers (Desk.com).
 
 GH issues:
 
- * [#259](https://github.com/ruby-amqp/bunny/pull/259)
- * [#260](https://github.com/ruby-amqp/bunny/pull/260)
- * [#261](https://github.com/ruby-amqp/bunny/pull/261)
+ * [#259](https://github.com/ruby-amqp/bunni/pull/259)
+ * [#260](https://github.com/ruby-amqp/bunni/pull/260)
+ * [#261](https://github.com/ruby-amqp/bunni/pull/261)
 
 
 ### Socket Read and Write Timeout Improvements
 
-Bunny now sets a read timeout on the sockets it opens, and uses
+Bunni now sets a read timeout on the sockets it opens, and uses
 `IO.select` timeouts as the most reliable option available
 on Ruby 1.9 and later.
 
-GH issue: [#254](https://github.com/ruby-amqp/bunny/pull/254).
+GH issue: [#254](https://github.com/ruby-amqp/bunni/pull/254).
 
 Contributed by Andre Foeken (Nedap).
 
@@ -201,12 +201,12 @@ Contributed by Andre Foeken (Nedap).
 TLS certificate options now accept inline certificates as well as
 file paths.
 
-GH issues: [#255](https://github.com/ruby-amqp/bunny/pull/255), [#256](https://github.com/ruby-amqp/bunny/pull/256).
+GH issues: [#255](https://github.com/ruby-amqp/bunni/pull/255), [#256](https://github.com/ruby-amqp/bunni/pull/256).
 
 Contributed by Will Barrett (Sqwiggle).
 
 
-## Changes between Bunny 1.4.0 and 1.5.0
+## Changes between Bunni 1.4.0 and 1.5.0
 
 ### Improved Uncaught Exception Handler
 
@@ -218,7 +218,7 @@ Contributed by Carl Hörberg (CloudAMQP).
 
 ### Convenience Method for Temporary (Server-named, Exclusive) Queue Declaration
 
-`Bunny::Channel#temporary_queue` is a convenience method that declares a new
+`Bunni::Channel#temporary_queue` is a convenience method that declares a new
 server-named exclusive queue:
 
 ``` ruby
@@ -234,7 +234,7 @@ Contributed by Andre Foeken (Nedap).
 
 ### Host Lists
 
-It is now possible to pass the `:hosts` option to `Bunny.new`/`Bunny::Session#initialize`.
+It is now possible to pass the `:hosts` option to `Bunni.new`/`Bunni::Session#initialize`.
 When connection to RabbitMQ (including during connection recovery), a random host
 will be chosen from the list.
 
@@ -244,13 +244,13 @@ Contributed by Andre Foeken (Nedap).
 
 ### Default Channel Removed
 
-Breaks compatibility with Bunny 0.8.x.
+Breaks compatibility with Bunni 0.8.x.
 
-`Bunny:Session#default_channel` was removed. Please open channels explicitly now,
+`Bunni:Session#default_channel` was removed. Please open channels explicitly now,
 as all the examples in the docs do.
 
 
-## Changes between Bunny 1.3.0 and 1.4.0
+## Changes between Bunni 1.3.0 and 1.4.0
 
 ### Channel#wait_for_confirms Returns Immediately If All Publishes Confirmed
 
@@ -266,12 +266,12 @@ Contributed by Devin Christensen.
 
 ### NoMethodError on Thread During Shutdown
 
-During abnormal termination, `Bunny::Session#close` no longer tries
+During abnormal termination, `Bunni::Session#close` no longer tries
 to call the non-existent `terminate_with` method on its origin
 thread.
 
 
-## Changes between Bunny 1.2.0 and 1.3.0
+## Changes between Bunni 1.2.0 and 1.3.0
 
 ### TLS Can Be Explicitly Disabled
 
@@ -279,7 +279,7 @@ TLS now can be explicitly disabled even when connecting (without TLS)
 to the default RabbitMQ TLS/amqps port (5671):
 
 ``` ruby
-conn = Bunny.new(:port => 5671, :tls => false)
+conn = Bunni.new(:port => 5671, :tls => false)
 ```
 
 Contributed by Muhan Zou.
@@ -287,7 +287,7 @@ Contributed by Muhan Zou.
 
 ### Single Threaded Connections Raise Shutdown Exceptions
 
-Single threaded Bunny connections will now raise exceptions
+Single threaded Bunni connections will now raise exceptions
 that occur during shutdown as is (instead of trying to shut down
 I/O loop which only threaded ones have).
 
@@ -296,33 +296,33 @@ Contributed by Carl Hörberg.
 
 ### Synchronization Improvements for Session#close
 
-`Bunny::Session#close` now better synchronizes state transitions,
+`Bunni::Session#close` now better synchronizes state transitions,
 eliminating a few race condition scenarios with I/O reader thread.
 
 
-### Bunny::Exchange.default Fix
+### Bunni::Exchange.default Fix
 
-`Bunny::Exchange.default` no longer raises an exception.
+`Bunni::Exchange.default` no longer raises an exception.
 
 Note that it is a legacy compatibility method. Please use
-`Bunny::Channel#default_exchange` instead.
+`Bunni::Channel#default_exchange` instead.
 
 Contributed by Justin Litchfield.
 
-GH issue [#211](https://github.com/ruby-amqp/bunny/pull/211).
+GH issue [#211](https://github.com/ruby-amqp/bunni/pull/211).
 
-### Bunny::Queue#pop_as_hash Removed
+### Bunni::Queue#pop_as_hash Removed
 
-`Bunny::Queue#pop_as_hash`, which was added to ease migration
-to Bunny 0.9, was removed.
+`Bunni::Queue#pop_as_hash`, which was added to ease migration
+to Bunni 0.9, was removed.
 
-### Bunny::Queue#pop Wraps Metadata
+### Bunni::Queue#pop Wraps Metadata
 
-`Bunny::Queue#pop` now wraps `basic.get-ok` and message properties
-into `Bunny::GetResponse` and `Bunny::MessageProperties`, just like
+`Bunni::Queue#pop` now wraps `basic.get-ok` and message properties
+into `Bunni::GetResponse` and `Bunni::MessageProperties`, just like
 `basic.consume` deliveries.
 
-GH issue: [#212](https://github.com/ruby-amqp/bunny/issues/212).
+GH issue: [#212](https://github.com/ruby-amqp/bunni/issues/212).
 
 ### Better Synchronization for Publisher Confirms
 
@@ -340,36 +340,36 @@ it already had).
 
 
 
-## Changes between Bunny 1.1.0 and 1.2.0
+## Changes between Bunni 1.1.0 and 1.2.0
 
-### :key Supported in Bunny::Channel#queue_bind
+### :key Supported in Bunni::Channel#queue_bind
 
-It is now possible to use `:key` (which Bunny versions prior to 0.9 used)
-as well as `:routing_key` as an argument to `Bunny::Queue#bind`.
+It is now possible to use `:key` (which Bunni versions prior to 0.9 used)
+as well as `:routing_key` as an argument to `Bunni::Queue#bind`.
 
 ### System Exceptions Not Rescued by the Library
 
-Bunny now rescues `StandardError` instead of `Exception` where
+Bunni now rescues `StandardError` instead of `Exception` where
 it automatically does so (e.g. when dispatching deliveries to consumers).
 
 Contributed by Alex Young.
 
 
-### Initial Socket Connection Timeout Again Raises Bunny::TCPConnectionFailed
+### Initial Socket Connection Timeout Again Raises Bunni::TCPConnectionFailed
 
-Initial socket connection timeout again raises `Bunny::TCPConnectionFailed`
+Initial socket connection timeout again raises `Bunni::TCPConnectionFailed`
 on the connection origin thread.
 
 ### Thread Leaks Plugged
 
-`Bunny::Session#close` on connections that have experienced a network failure
+`Bunni::Session#close` on connections that have experienced a network failure
 will correctly clean up I/O and heartbeat sender threads.
 
 Contributed by m-o-e.
 
-### Bunny::Concurrent::ContinuationQueue#poll Rounding Fix
+### Bunni::Concurrent::ContinuationQueue#poll Rounding Fix
 
-`Bunny::Concurrent::ContinuationQueue#poll` no longer floors the argument
+`Bunni::Concurrent::ContinuationQueue#poll` no longer floors the argument
 to the nearest second.
 
 Contributed by Brian Abreu.
@@ -377,17 +377,17 @@ Contributed by Brian Abreu.
 ### Routing Key Limit
 
 Per AMQP 0-9-1 spec, routing keys cannot be longer than 255 characters.
-`Bunny::Channel#basic_publish` and `Bunny::Exchange#publish` now enforces
+`Bunni::Channel#basic_publish` and `Bunni::Exchange#publish` now enforces
 this limit.
 
 ### Nagle's Algorithm Disabled Correctly
 
-Bunny now properly disables [Nagle's algorithm](http://boundary.com/blog/2012/05/02/know-a-delay-nagles-algorithm-and-you/)
+Bunni now properly disables [Nagle's algorithm](http://boundary.com/blog/2012/05/02/know-a-delay-nagles-algorithm-and-you/)
 on the sockets it opens. This likely means
 significantly lower latency for workloads that involve
 sending a lot of small messages very frequently.
 
-[Contributed](https://github.com/ruby-amqp/bunny/pull/187) by Nelson Gauthier (AirBnB).
+[Contributed](https://github.com/ruby-amqp/bunni/pull/187) by Nelson Gauthier (AirBnB).
 
 ### Internal Exchanges
 
@@ -395,13 +395,13 @@ Exchanges now can be declared as internal:
 
 ``` ruby
 ch = conn.create_channel
-x  = ch.fanout("bunny.tests.exchanges.internal", :internal => true)
+x  = ch.fanout("bunni.tests.exchanges.internal", :internal => true)
 ```
 
 Internal exchanges cannot be published to by clients and are solely used
 for [Exchange-to-Exchange bindings](http://rabbitmq.com/e2e.html) and various
 plugins but apps may still need to bind them. Now it is possible
-to do so with Bunny.
+to do so with Bunni.
 
 ### Uncaught Consumer Exceptions
 
@@ -416,25 +416,25 @@ end
 
 
 
-## Changes between Bunny 1.1.0.rc1 and 1.1.0
+## Changes between Bunni 1.1.0.rc1 and 1.1.0
 
 ### Synchronized Session#create_channel and Session#close_channel
 
-Full bodies of `Bunny::Session#create_channel` and `Bunny::Session#close_channel`
+Full bodies of `Bunni::Session#create_channel` and `Bunni::Session#close_channel`
 are now synchronized, which makes sure concurrent `channel.open` and subsequent
 operations (e.g. `exchange.declare`) do not result in connection-level exceptions
 (incorrect connection state transitions).
 
 ### Corrected Recovery Log Message
 
-Bunny will now use actual recovery interval in the log.
+Bunni will now use actual recovery interval in the log.
 
 Contributed by Chad Fowler.
 
 
 
 
-## Changes between Bunny 1.1.0.pre2 and 1.1.0.rc1
+## Changes between Bunni 1.1.0.pre2 and 1.1.0.rc1
 
 ### Full Channel State Recovery
 
@@ -444,14 +444,14 @@ transaction modes.
 
 ### TLS	Without Peer Verification
 
-Bunny now successfully performs	TLS upgrade when peer verification
+Bunni now successfully performs	TLS upgrade when peer verification
 is disabled.
 
 Contributed by Jordan Curzon.
 
-### Bunny::Session#with_channel Ensures the Channel is Closed
+### Bunni::Session#with_channel Ensures the Channel is Closed
 
-`Bunny::Session#with_channel` now makes sure the channel is closed
+`Bunni::Session#with_channel` now makes sure the channel is closed
 even if provided block raises an exception
 
 Contributed by Carl Hoerberg.
@@ -460,7 +460,7 @@ Contributed by Carl Hoerberg.
 
 ### Channel Number = 0 is Rejected
 
-`Bunny::Session#create_channel` will now reject channel number 0.
+`Bunni::Session#create_channel` will now reject channel number 0.
 
 
 ### Single Threaded Mode Fixes
@@ -473,7 +473,7 @@ undefined method `event_loop'
 
 
 
-## Changes between Bunny 1.1.0.pre1 and 1.1.0.pre2
+## Changes between Bunni 1.1.0.pre1 and 1.1.0.pre2
 
 ### connection.tune.channel_max No Longer Overflows
 
@@ -482,7 +482,7 @@ greater than 2^16 - 1 (65535). This would result in a silent overflow
 during serialization. The issue was harmless in practice but is still
 a bug that can be quite confusing.
 
-Bunny now caps max number of channels to 65535. This allows it to be
+Bunni now caps max number of channels to 65535. This allows it to be
 forward compatible with future RabbitMQ versions that may allow limiting
 total # of open channels via server configuration.
 
@@ -493,12 +493,12 @@ bug fixes and performance improvements for channel ID allocator.
 
 ### Thread Leaks Fixes
 
-Bunny will now correctly release heartbeat sender when allocating
+Bunni will now correctly release heartbeat sender when allocating
 a new one (usually happens only when connection recovers from a network
 failure).
 
 
-## Changes between Bunny 1.0.0 and 1.1.0.pre1
+## Changes between Bunni 1.0.0 and 1.1.0.pre1
 
 ### Versioned Delivery Tag Fix
 
@@ -510,7 +510,7 @@ GitHub issues: #171.
 
 ### User-Provided Loggers
 
-Bunny now can use any logger that provides the same API as Ruby standard library's `Logger`:
+Bunni now can use any logger that provides the same API as Ruby standard library's `Logger`:
 
 ``` ruby
 require "logger"
@@ -518,52 +518,52 @@ require "stringio"
 
 io = StringIO.new
 # will log to `io`
-Bunny.new(:logger => Logger.new(io))
+Bunni.new(:logger => Logger.new(io))
 ```
 
 ### Default CA's Paths Are Disabled on JRuby
 
-Bunny uses OpenSSL provided CA certificate paths. This
+Bunni uses OpenSSL provided CA certificate paths. This
 caused problems on some platforms on JRuby (see [jruby/jruby#155](https://github.com/jruby/jruby/issues/1055)).
 
-To avoid these issues, Bunny no longer uses default CA certificate paths on JRuby
+To avoid these issues, Bunni no longer uses default CA certificate paths on JRuby
 (there are no changes for other Rubies), so it's necessary to provide
 CA certificate explicitly.
 
 ### Fixes CPU Burn on JRuby
 
-Bunny now uses slightly different ways of continuously reading from the socket
+Bunni now uses slightly different ways of continuously reading from the socket
 on CRuby and JRuby, to prevent abnormally high CPU usage on JRuby after a
 certain period of time (the frequency of `EWOULDBLOCK` being raised spiked
 sharply).
 
 
 
-## Changes between Bunny 1.0.0.rc2 and 1.0.0.rc3
+## Changes between Bunni 1.0.0.rc2 and 1.0.0.rc3
 
 ### [Authentication Failure Notification](http://www.rabbitmq.com/auth-notification.html) Support
 
-`Bunny::AuthenticationFailureError` is a new auth failure exception
-that subclasses `Bunny::PossibleAuthenticationFailureError` for
+`Bunni::AuthenticationFailureError` is a new auth failure exception
+that subclasses `Bunni::PossibleAuthenticationFailureError` for
 backwards compatibility.
 
-As such, `Bunny::PossibleAuthenticationFailureError`'s error message
+As such, `Bunni::PossibleAuthenticationFailureError`'s error message
 has changed.
 
 This extension is available in RabbitMQ 3.2+.
 
 
-### Bunny::Session#exchange_exists?
+### Bunni::Session#exchange_exists?
 
-`Bunny::Session#exchange_exists?` is a new predicate that makes it
+`Bunni::Session#exchange_exists?` is a new predicate that makes it
 easier to check if a exchange exists.
 
 It uses a one-off channel and `exchange.declare` with `passive` set to true
 under the hood.
 
-### Bunny::Session#queue_exists?
+### Bunni::Session#queue_exists?
 
-`Bunny::Session#queue_exists?` is a new predicate that makes it
+`Bunni::Session#queue_exists?` is a new predicate that makes it
 easier to check if a queue exists.
 
 It uses a one-off channel and `queue.declare` with `passive` set to true
@@ -584,7 +584,7 @@ of filesystem paths. The options are the same:
 For example:
 
 ``` ruby
-conn = Bunny.new(:tls                   => true,
+conn = Bunni.new(:tls                   => true,
                  :tls_cert              => ENV["TLS_CERTIFICATE"],
                  :tls_key               => ENV["TLS_PRIVATE_KEY"],
                  :tls_ca_certificates   => ["./examples/tls/cacert.pem"])
@@ -592,7 +592,7 @@ conn = Bunny.new(:tls                   => true,
 
 
 
-## Changes between Bunny 1.0.0.rc1 and 1.0.0.rc2
+## Changes between Bunni 1.0.0.rc1 and 1.0.0.rc2
 
 ### Ruby 1.8.7 Compatibility Fixes
 
@@ -600,7 +600,7 @@ Ruby 1.8.7 compatibility fixes around timeouts.
 
 
 
-## Changes between Bunny 1.0.0.pre6 and 1.0.0.rc1
+## Changes between Bunni 1.0.0.pre6 and 1.0.0.rc1
 
 ### amq-protocol Update
 
@@ -608,51 +608,51 @@ Minimum `amq-protocol` version is now `1.8.0` which includes
 a bug fix for messages exactly 128 Kb in size.
 
 
-### Add timeout Bunny::ConsumerWorkPool#join
+### Add timeout Bunni::ConsumerWorkPool#join
 
-`Bunny::ConsumerWorkPool#join` now accepts an optional
+`Bunni::ConsumerWorkPool#join` now accepts an optional
 timeout argument.
 
 
-## Changes between Bunny 1.0.0.pre5 and 1.0.0.pre6
+## Changes between Bunni 1.0.0.pre5 and 1.0.0.pre6
 
 ### Respect RABBITMQ_URL value
 
 `RABBITMQ_URL` env variable will now have effect even if
-Bunny.new is invoked without arguments.
+Bunni.new is invoked without arguments.
 
 
 
-## Changes between Bunny 1.0.0.pre4 and 1.0.0.pre5
+## Changes between Bunni 1.0.0.pre4 and 1.0.0.pre5
 
 ### Ruby 1.8 Compatibility
 
-Bunny is Ruby 1.8-compatible again and no longer references
+Bunni is Ruby 1.8-compatible again and no longer references
 `RUBY_ENGINE`.
 
-### Bunny::Session.parse_uri
+### Bunni::Session.parse_uri
 
-`Bunny::Session.parse_uri` is a new method that parses
-connection URIs into hashes that `Bunny::Session#initialize`
+`Bunni::Session.parse_uri` is a new method that parses
+connection URIs into hashes that `Bunni::Session#initialize`
 accepts.
 
 ``` ruby
-Bunny::Session.parse_uri("amqp://user:pwd@broker.eng.megacorp.local/myapp_qa")
+Bunni::Session.parse_uri("amqp://user:pwd@broker.eng.megacorp.local/myapp_qa")
 ```
 
 ### Default Paths for TLS/SSL CA's on All OS'es
 
-Bunny now uses OpenSSL to detect default TLS/SSL CA's paths, extending
+Bunni now uses OpenSSL to detect default TLS/SSL CA's paths, extending
 this feature to OS'es other than Linux.
 
 Contributed by Jingwen Owen Ou.
 
 
-## Changes between Bunny 1.0.0.pre3 and 1.0.0.pre4
+## Changes between Bunni 1.0.0.pre3 and 1.0.0.pre4
 
 ### Default Paths for TLS/SSL CA's on Linux
 
-Bunny now will use the following TLS/SSL CA's paths on Linux by default:
+Bunni now will use the following TLS/SSL CA's paths on Linux by default:
 
  * `/etc/ssl/certs/ca-certificates.crt` on Ubuntu/Debian
  * `/etc/ssl/certs/ca-bundle.crt` on Amazon Linux
@@ -664,21 +664,21 @@ or `:tls_ca_certificates`.
 
 Contributed by Carl Hörberg.
 
-### Consumers Can Be Re-Registered From Bunny::Consumer#handle_cancellation
+### Consumers Can Be Re-Registered From Bunni::Consumer#handle_cancellation
 
 It is now possible to re-register a consumer (and use any other synchronous methods)
-from `Bunny::Consumer#handle_cancellation`, which is now invoked in the channel's
+from `Bunni::Consumer#handle_cancellation`, which is now invoked in the channel's
 thread pool.
 
 
-### Bunny::Session#close Fixed for Single Threaded Connections
+### Bunni::Session#close Fixed for Single Threaded Connections
 
-`Bunny::Session#close` with single threaded connections no longer fails
+`Bunni::Session#close` with single threaded connections no longer fails
 with a nil pointer exception.
 
 
 
-## Changes between Bunny 1.0.0.pre2 and 1.0.0.pre3
+## Changes between Bunni 1.0.0.pre2 and 1.0.0.pre3
 
 This release has **breaking API changes**.
 
@@ -695,39 +695,39 @@ tag to ack or reject a message will produce no method sent to RabbitMQ.
 Note that unacknowledged messages will be requeued by RabbitMQ when connection
 goes down anyway.
 
-This involves an API change: `Bunny::DeliveryMetadata#delivery_tag` is now
+This involves an API change: `Bunni::DeliveryMetadata#delivery_tag` is now
 and instance of a class that responds to `#tag` and `#to_i` and is accepted
-by `Bunny::Channel#ack` and related methods.
+by `Bunni::Channel#ack` and related methods.
 
 Integers are still accepted by the same methods.
 
 
-## Changes between Bunny 1.0.0.pre1 and 1.0.0.pre2
+## Changes between Bunni 1.0.0.pre1 and 1.0.0.pre2
 
 ### Exclusivity Violation for Consumers Now Raises a Reasonable Exception
 
 When a second consumer is registered for the same queue on different channels,
-a reasonable exception (`Bunny::AccessRefused`) will be raised.
+a reasonable exception (`Bunni::AccessRefused`) will be raised.
 
 
 ### Reentrant Mutex Implementation
 
-Bunny now allows mutex impl to be configurable, uses reentrant Monitor
+Bunni now allows mutex impl to be configurable, uses reentrant Monitor
 by default.
 
 Non-reentrant mutexes is a major PITA and may affect code that
-uses Bunny.
+uses Bunni.
 
 Avg. publishing throughput with Monitor drops slightly from
 5.73 Khz to 5.49 Khz (about 4% decrease), which is reasonable
-for Bunny.
+for Bunni.
 
 Apps that need these 4% can configure what mutex implementation
 is used on per-connection basis.
 
-### Eliminated Race Condition in Bunny::Session#close
+### Eliminated Race Condition in Bunni::Session#close
 
-`Bunny::Session#close` had a race condition that caused (non-deterministic)
+`Bunni::Session#close` had a race condition that caused (non-deterministic)
 exceptions when connection transport was closed before connection
 reader loop was guaranteed to have stopped.
 
@@ -742,14 +742,14 @@ thread so they
 
 ### Client TLS Certificates are Optional
 
-Bunny will no longer require client TLS certificates. Note that CA certificate
+Bunni will no longer require client TLS certificates. Note that CA certificate
 list is still necessary.
 
 If RabbitMQ TLS configuration requires peer verification, client certificate
 and private key are mandatory.
 
 
-## Changes between Bunny 0.9.0 and 1.0.0.pre1
+## Changes between Bunni 0.9.0 and 1.0.0.pre1
 
 ### Publishing Over Closed Connections
 
@@ -761,23 +761,23 @@ Contributed by Matt Campbell.
 
 ### Reliability Improvement in Automatic Network Failure Recovery
 
-Bunny now ensures a new connection transport (socket) is initialized
+Bunni now ensures a new connection transport (socket) is initialized
 before any recovery is attempted.
 
 
-### Reliability Improvement in Bunny::Session#create_channel
+### Reliability Improvement in Bunni::Session#create_channel
 
-`Bunny::Session#create_channel` now uses two separate mutexes to avoid
+`Bunni::Session#create_channel` now uses two separate mutexes to avoid
 a (very rare) issue when the previous implementation would try to
 re-acquire the same mutex and fail (Ruby mutexes are non-reentrant).
 
 
 
-## Changes between Bunny 0.9.0.rc1 and 0.9.0.rc2
+## Changes between Bunni 0.9.0.rc1 and 0.9.0.rc2
 
 ### Channel Now Properly Restarts Consumer Pool
 
-In a case when all consumers are cancelled, `Bunny::Channel`
+In a case when all consumers are cancelled, `Bunni::Channel`
 will shut down its consumer delivery thread pool.
 
 It will also now mark the pool as not running so that it can be
@@ -786,14 +786,14 @@ started again successfully if new consumers are registered later.
 GH issue: #133.
 
 
-### Bunny::Queue#pop_waiting is Removed
+### Bunni::Queue#pop_waiting is Removed
 
 A little bit of background: on MRI, the method raised `ThreadErrors`
 reliably. On JRuby, we used a different [internal] queue implementation
 from JDK so it wasn't an issue.
 
 `Timeout.timeout` uses `Thread#kill` and `Thread#join`, both of which
-eventually attempt to acquire a mutex used by Queue#pop, which Bunny
+eventually attempt to acquire a mutex used by Queue#pop, which Bunni
 currently uses for continuations. The mutex is already has an owner
 and so a ThreadError is raised.
 
@@ -808,9 +808,9 @@ in 2008.
 Finding a workaround will probably take a bit of time and may involve
 reimplementing standard library and core classes.
 
-We don't want this issue to block Bunny 0.9 release. Neither we want
+We don't want this issue to block Bunni 0.9 release. Neither we want
 to ship a broken feature.  So as a result, we will drop
-Bunny::Queue#pop_waiting since it cannot be reliably implemented in a
+Bunni::Queue#pop_waiting since it cannot be reliably implemented in a
 reasonable amount of time on MRI.
 
 Per issue #131.
@@ -818,14 +818,14 @@ Per issue #131.
 
 ### More Flexible SSLContext Configuration
 
-Bunny will now upgrade connection to SSL in `Bunny::Session#start`,
+Bunni will now upgrade connection to SSL in `Bunni::Session#start`,
 so it is possible to fine tune SSLContext and socket settings
 before that:
 
 ``` ruby
-require "bunny"
+require "bunni"
 
-conn = Bunny.new(:tls                   => true,
+conn = Bunni.new(:tls                   => true,
                  :tls_cert              => "examples/tls/client_cert.pem",
                  :tls_key               => "examples/tls/client_key.pem",
                  :tls_ca_certificates   => ["./examples/tls/cacert.pem"])
@@ -834,15 +834,15 @@ puts conn.transport.socket.inspect
 puts conn.transport.tls_context.inspect
 ```
 
-This also means that `Bunny.new` will now open the socket. Previously
-it was only done when `Bunny::Session#start` was invoked.
+This also means that `Bunni.new` will now open the socket. Previously
+it was only done when `Bunni::Session#start` was invoked.
 
 
-## Changes between Bunny 0.9.0.pre13 and 0.9.0.rc1
+## Changes between Bunni 0.9.0.pre13 and 0.9.0.rc1
 
 ### TLS Support
 
-Bunny 0.9 finally supports TLS. There are 3 new options `Bunny.new` takes:
+Bunni 0.9 finally supports TLS. There are 3 new options `Bunni.new` takes:
 
  * `:tls` which, when set to `true`, will set SSL context up and switch to TLS port (5671)
  * `:tls_cert` which is a string path to the client certificate (public key) in PEM format
@@ -852,24 +852,24 @@ Bunny 0.9 finally supports TLS. There are 3 new options `Bunny.new` takes:
 An example:
 
 ``` ruby
-conn = Bunny.new(:tls                   => true,
+conn = Bunni.new(:tls                   => true,
                  :tls_cert              => "examples/tls/client_cert.pem",
                  :tls_key               => "examples/tls/client_key.pem",
                  :tls_ca_certificates   => ["./examples/tls/cacert.pem"])
 ```
 
 
-### Bunny::Queue#pop_waiting
+### Bunni::Queue#pop_waiting
 
 **This function was removed in v0.9.0.rc2**
 
-`Bunny::Queue#pop_waiting` is a new function that mimics `Bunny::Queue#pop`
+`Bunni::Queue#pop_waiting` is a new function that mimics `Bunni::Queue#pop`
 but will wait until a message is available. It uses a `:timeout` option and will
 raise an exception if the timeout is hit:
 
 ``` ruby
 # given 1 message in the queue,
-# works exactly as Bunny::Queue#get
+# works exactly as Bunni::Queue#get
 q.pop_waiting
 
 # given no messages in the queue, will wait for up to 0.5 seconds
@@ -881,15 +881,15 @@ q.pop_waiting(:timeout => 0.5)
 This method only makes sense for collecting Request/Reply ("RPC") replies.
 
 
-### Bunny::InvalidCommand is now Bunny::CommandInvalid
+### Bunni::InvalidCommand is now Bunni::CommandInvalid
 
-`Bunny::InvalidCommand` is now `Bunny::CommandInvalid` (follows
+`Bunni::InvalidCommand` is now `Bunni::CommandInvalid` (follows
 the exception class naming convention based on response status
 name).
 
 
 
-## Changes between Bunny 0.9.0.pre12 and 0.9.0.pre13
+## Changes between Bunni 0.9.0.pre12 and 0.9.0.pre13
 
 ### Channels Without Consumers Now Tear Down Consumer Pools
 
@@ -901,7 +901,7 @@ This is typically the desired behavior.
 
 ### Consumer and Channel Available In Delivery Handlers
 
-Delivery handlers registered via `Bunny::Queue#subscribe` now will have
+Delivery handlers registered via `Bunni::Queue#subscribe` now will have
 access to the consumer and channel they are associated with via the
 `delivery_info` argument:
 
@@ -912,37 +912,37 @@ q.subscribe do |delivery_info, properties, payload|
 end
 ```
 
-This allows using `Bunny::Queue#subscribe` for one-off consumers
+This allows using `Bunni::Queue#subscribe` for one-off consumers
 much easier, including when used with the `:block` option.
 
-### Bunny::Exchange#wait_for_confirms
+### Bunni::Exchange#wait_for_confirms
 
-`Bunny::Exchange#wait_for_confirms` is a convenience method on `Bunny::Exchange` that
+`Bunni::Exchange#wait_for_confirms` is a convenience method on `Bunni::Exchange` that
 delegates to the method with the same name on exchange's channel.
 
 
-## Changes between Bunny 0.9.0.pre11 and 0.9.0.pre12
+## Changes between Bunni 0.9.0.pre11 and 0.9.0.pre12
 
 ### Ruby 1.8 Compatibility Regression Fix
 
-`Bunny::Socket` no longer uses Ruby 1.9-specific constants.
+`Bunni::Socket` no longer uses Ruby 1.9-specific constants.
 
 
-### Bunny::Channel#wait_for_confirms Return Value Regression Fix
+### Bunni::Channel#wait_for_confirms Return Value Regression Fix
 
-`Bunny::Channel#wait_for_confirms` returns `true` or `false` again.
+`Bunni::Channel#wait_for_confirms` returns `true` or `false` again.
 
 
 
-## Changes between Bunny 0.9.0.pre10 and 0.9.0.pre11
+## Changes between Bunni 0.9.0.pre10 and 0.9.0.pre11
 
-### Bunny::Session#create_channel Now Accepts Consumer Work Pool Size
+### Bunni::Session#create_channel Now Accepts Consumer Work Pool Size
 
-`Bunny::Session#create_channel` now accepts consumer work pool size as
+`Bunni::Session#create_channel` now accepts consumer work pool size as
 the second argument:
 
 ``` ruby
-# nil means channel id will be allocated by Bunny.
+# nil means channel id will be allocated by Bunni.
 # 8 is the number of threads in the consumer work pool this channel will use.
 ch = conn.create_channel(nil, 8)
 ```
@@ -959,7 +959,7 @@ Activity tracking now takes sent frames into account.
 ### Time-bound continuations
 
 If a network loop exception causes "main" session thread to never
-receive a response, methods such as `Bunny::Channel#queue` will simply time out
+receive a response, methods such as `Bunni::Channel#queue` will simply time out
 and raise Timeout::Error now, which can be handled.
 
 It will not start automatic recovery for two reasons:
@@ -968,7 +968,7 @@ It will not start automatic recovery for two reasons:
  * It may do more damage than good
 
 Kicking off network recovery manually is a matter of calling
-`Bunny::Session#handle_network_failure`.
+`Bunni::Session#handle_network_failure`.
 
 The main benefit of this implementation is that it will never
 block the main app/session thread forever, and it is really
@@ -979,13 +979,13 @@ Fixes #112.
 
 ### Logging Support
 
-Every Bunny connection now has a logger. By default, Bunny will use STDOUT
+Every Bunni connection now has a logger. By default, Bunni will use STDOUT
 as logging device. This is configurable using the `:log_file` option:
 
 ``` ruby
-require "bunny"
+require "bunni"
 
-conn = Bunny.new(:log_level => :warn)
+conn = Bunni.new(:log_level => :warn)
 ```
 
 or the `BUNNY_LOG_LEVEL` environment variable that can take one of the following
@@ -1004,13 +1004,13 @@ To redirect logging to a file or any other object that can act as an I/O entity,
 pass it to the `:log_file` option.
 
 
-## Changes between Bunny 0.9.0.pre9 and 0.9.0.pre10
+## Changes between Bunni 0.9.0.pre9 and 0.9.0.pre10
 
 This release contains a **breaking API change**.
 
 ### Concurrency Improvements On JRuby
 
-On JRuby, Bunny now will use `java.util.concurrent`-backed implementations
+On JRuby, Bunni now will use `java.util.concurrent`-backed implementations
 of some of the concurrency primitives. This both improves client stability
 (JDK concurrency primitives has been around for 9 years and have
 well-defined, documented semantics) and opens the door to solving
@@ -1019,13 +1019,13 @@ some tricky failure handling problems in the future.
 
 ### Explicitly Closed Sockets
 
-Bunny now will correctly close the socket previous connection had
+Bunni now will correctly close the socket previous connection had
 when recovering from network issues.
 
 
-### Bunny::Exception Now Extends StandardError
+### Bunni::Exception Now Extends StandardError
 
-`Bunny::Exception` now inherits from `StandardError` and not `Exception`.
+`Bunni::Exception` now inherits from `StandardError` and not `Exception`.
 
 Naked rescue like this
 
@@ -1046,15 +1046,15 @@ This is a **breaking API change**.
 
 
 
-## Changes between Bunny 0.9.0.pre8 and 0.9.0.pre9
+## Changes between Bunni 0.9.0.pre8 and 0.9.0.pre9
 
-### Bunny::Session#start Now Returns a Session
+### Bunni::Session#start Now Returns a Session
 
-`Bunny::Session#start` now returns a session instead of the default channel
+`Bunni::Session#start` now returns a session instead of the default channel
 (which wasn't intentional, default channel is a backwards-compatibility implementation
 detail).
 
-`Bunny::Session#start` also no longer leaves dead threads behind if called multiple
+`Bunni::Session#start` also no longer leaves dead threads behind if called multiple
 times on the same connection.
 
 
@@ -1071,17 +1071,17 @@ Network reconnection now kicks in after a delay to avoid aggressive
 reconnections in situations when we don't want to endlessly reconnect
 (e.g. when the connection was closed via the Management UI).
 
-The `:network_recovery_interval` option passed to `Bunny::Session#initialize` and `Bunny.new`
+The `:network_recovery_interval` option passed to `Bunni::Session#initialize` and `Bunni.new`
 controls the interval. Default is 5 seconds.
 
 
 ### Default Heartbeat Value Is Now Server-Defined
 
-Bunny will now use heartbeat value provided by RabbitMQ by default.
+Bunni will now use heartbeat value provided by RabbitMQ by default.
 
 
 
-## Changes between Bunny 0.9.0.pre7 and 0.9.0.pre8
+## Changes between Bunni 0.9.0.pre7 and 0.9.0.pre8
 
 ### Stability Improvements
 
@@ -1092,7 +1092,7 @@ layer, connection error handling, and concurrency hazards.
 ### Automatic Connection Recovery Can Be Disabled
 
 Automatic connection recovery now can be disabled by passing
-the `:automatically_recover => false` option to `Bunny#initialize`).
+the `:automatically_recover => false` option to `Bunni#initialize`).
 
 When the recovery is disabled, network I/O-related exceptions will
 cause an exception to be raised in thee thread the connection was
@@ -1101,7 +1101,7 @@ started on.
 
 ### No Timeout Control For Publishing
 
-`Bunny::Exchange#publish` and `Bunny::Channel#basic_publish` no
+`Bunni::Exchange#publish` and `Bunni::Channel#basic_publish` no
 longer perform timeout control (using the timeout module) which
 roughly increases throughput for flood publishing by 350%.
 
@@ -1109,11 +1109,11 @@ Apps that need delivery guarantees should use publisher confirms.
 
 
 
-## Changes between Bunny 0.9.0.pre6 and 0.9.0.pre7
+## Changes between Bunni 0.9.0.pre6 and 0.9.0.pre7
 
-### Bunny::Channel#on_error
+### Bunni::Channel#on_error
 
-`Bunny::Channel#on_error` is a new method that lets you define
+`Bunni::Channel#on_error` is a new method that lets you define
 handlers for channel errors that are caused by methods that have no
 responses in the protocol (`basic.ack`, `basic.reject`, and `basic.nack`).
 
@@ -1142,50 +1142,50 @@ Contributed by Greg Brockman.
 
 ### API Reference
 
-[Bunny API reference](http://reference.rubybunny.info) is now up online.
+[Bunni API reference](http://reference.rubybunni.info) is now up online.
 
 
-### Bunny::Channel#basic_publish Support For :persistent
+### Bunni::Channel#basic_publish Support For :persistent
 
-`Bunny::Channel#basic_publish` now supports both
+`Bunni::Channel#basic_publish` now supports both
 `:delivery_mode` and `:persistent` options.
 
-### Bunny::Channel#nacked_set
+### Bunni::Channel#nacked_set
 
-`Bunny::Channel#nacked_set` is a counter-part to `Bunny::Channel#unacked_set`
+`Bunni::Channel#nacked_set` is a counter-part to `Bunni::Channel#unacked_set`
 that contains `basic.nack`-ed (rejected) delivery tags.
 
 
 ### Single-threaded Network Activity Mode
 
-Passing `:threaded => false` to `Bunny.new` now will use the same
+Passing `:threaded => false` to `Bunni.new` now will use the same
 thread for publisher confirmations (may be useful for retry logic
 implementation).
 
 Contributed by Greg Brockman.
 
 
-## Changes between Bunny 0.9.0.pre5 and 0.9.0.pre6
+## Changes between Bunni 0.9.0.pre5 and 0.9.0.pre6
 
 ### Automatic Network Failure Recovery
 
-Automatic Network Failure Recovery is a new Bunny feature that was earlier
+Automatic Network Failure Recovery is a new Bunni feature that was earlier
 impemented and vetted out in [amqp gem](http://rubyamqp.info). What it does
 is, when a network activity loop detects an issue, it will try to
 periodically recover [first TCP, then] AMQP 0.9.1 connection, reopen
 all channels, recover all exchanges, queues, bindings and consumers
 on those channels (to be clear: this only includes entities and consumers added via
-Bunny).
+Bunni).
 
 Publishers and consumers will continue operating shortly after the network
 connection recovers.
 
-Learn more in the [Error Handling and Recovery](http://rubybunny.info/articles/error_handling.html)
+Learn more in the [Error Handling and Recovery](http://rubybunni.info/articles/error_handling.html)
 documentation guide.
 
 ### Confirms Listeners
 
-Bunny now supports listeners (callbacks) on
+Bunni now supports listeners (callbacks) on
 
 ``` ruby
 ch.confirm_select do |delivery_tag, multiple, nack|
@@ -1200,18 +1200,18 @@ Contributed by Greg Brockman.
 Publisher confirms implementation now uses non-strict equality (`<=`) for
 cases when multiple messages are confirmed by RabbitMQ at once.
 
-`Bunny::Channel#unconfirmed_set` is now part of the public API that lets
+`Bunni::Channel#unconfirmed_set` is now part of the public API that lets
 developers access unconfirmed delivery tags to perform retries and such.
 
 Contributed by Greg Brockman.
 
 ### Publisher Confirms Concurrency Fix
 
-`Bunny::Channel#wait_for_confirms` will now correctly block the calling
+`Bunni::Channel#wait_for_confirms` will now correctly block the calling
 thread until all pending confirms are received.
 
 
-## Changes between Bunny 0.9.0.pre4 and 0.9.0.pre5
+## Changes between Bunni 0.9.0.pre4 and 0.9.0.pre5
 
 ### Channel Errors Reset
 
@@ -1219,14 +1219,14 @@ Channel error information is now properly reset when a channel is (re)opened.
 
 GH issue: #83.
 
-### Bunny::Consumer#initial Default Change
+### Bunni::Consumer#initial Default Change
 
-the default value of `Bunny::Consumer` noack argument changed from false to true
+the default value of `Bunni::Consumer` noack argument changed from false to true
 for consistency.
 
-### Bunny::Session#prefetch Removed
+### Bunni::Session#prefetch Removed
 
-Global prefetch is not implemented in RabbitMQ, so `Bunny::Session#prefetch`
+Global prefetch is not implemented in RabbitMQ, so `Bunni::Session#prefetch`
 is gone from the API.
 
 ### Queue Redeclaration Bug Fix
@@ -1241,13 +1241,13 @@ Channel queue and exchange caches are now properly invalidated when queues and
 exchanges are deleted.
 
 
-## Changes between Bunny 0.9.0.pre3 and 0.9.0.pre4
+## Changes between Bunni 0.9.0.pre3 and 0.9.0.pre4
 
 ### Heartbeats Support Fixes
 
 Heartbeats are now correctly sent at safe intervals (half of the configured
 interval). In addition, setting `:heartbeat => 0` (or `nil`) will disable
-heartbeats, just like in Bunny 0.8 and [amqp gem](http://rubyamqp.info).
+heartbeats, just like in Bunni 0.8 and [amqp gem](http://rubyamqp.info).
 
 Default `:heartbeat` value is now `600` (seconds), the same as RabbitMQ 3.0
 default.
@@ -1263,49 +1263,49 @@ GH issue: #78.
 
 ### Support for Alternative Authentication Mechanisms
 
-Bunny now supports two authentication mechanisms and can be extended
+Bunni now supports two authentication mechanisms and can be extended
 to support more. The supported methods are `"PLAIN"` (username
 and password) and `"EXTERNAL"` (typically uses TLS, UNIX sockets or
 another mechanism that does not rely on username/challenge pairs).
 
 To use the `"EXTERNAL"` method, pass `:auth_mechanism => "EXTERNAL"` to
-`Bunny.new`:
+`Bunni.new`:
 
 ``` ruby
 # uses the EXTERNAL authentication mechanism
-conn = Bunny.new(:auth_method => "EXTERNAL")
+conn = Bunni.new(:auth_method => "EXTERNAL")
 conn.start
 ```
 
-### Bunny::Consumer#cancel
+### Bunni::Consumer#cancel
 
-A new high-level API method: `Bunny::Consumer#cancel`, can be used to
-cancel a consumer. `Bunny::Queue#subscribe` will now return consumer
+A new high-level API method: `Bunni::Consumer#cancel`, can be used to
+cancel a consumer. `Bunni::Queue#subscribe` will now return consumer
 instances when the `:block` option is passed in as `false`.
 
 
-### Bunny::Exchange#delete Behavior Change
+### Bunni::Exchange#delete Behavior Change
 
-`Bunny::Exchange#delete` will no longer delete pre-declared exchanges
-that cannot be declared by Bunny (`amq.*` and the default exchange).
+`Bunni::Exchange#delete` will no longer delete pre-declared exchanges
+that cannot be declared by Bunni (`amq.*` and the default exchange).
 
 
-### Bunny::DeliveryInfo#redelivered?
+### Bunni::DeliveryInfo#redelivered?
 
-`Bunny::DeliveryInfo#redelivered?` is a new method that is an alias
-to `Bunny::DeliveryInfo#redelivered` but follows the Ruby community convention
+`Bunni::DeliveryInfo#redelivered?` is a new method that is an alias
+to `Bunni::DeliveryInfo#redelivered` but follows the Ruby community convention
 about predicate method names.
 
-### Corrected Bunny::DeliveryInfo#delivery_tag Name
+### Corrected Bunni::DeliveryInfo#delivery_tag Name
 
-`Bunny::DeliveryInfo#delivery_tag` had a typo which is now fixed.
+`Bunni::DeliveryInfo#delivery_tag` had a typo which is now fixed.
 
 
-## Changes between Bunny 0.9.0.pre2 and 0.9.0.pre3
+## Changes between Bunni 0.9.0.pre2 and 0.9.0.pre3
 
 ### Client Capabilities
 
-Bunny now correctly lists RabbitMQ extensions it currently supports in client capabilities:
+Bunni now correctly lists RabbitMQ extensions it currently supports in client capabilities:
 
  * `basic.nack`
  * exchange-to-exchange bindings
@@ -1318,8 +1318,8 @@ Bunny now correctly lists RabbitMQ extensions it currently supports in client ca
 RabbitMQ feature that lets publishers keep track of message routing without adding
 noticeable throughput degradation as it is the case with AMQP 0.9.1 transactions.
 
-Bunny `0.9.0.pre3` supports publisher confirms. Publisher confirms are enabled per channel,
-using the `Bunny::Channel#confirm_select` method. `Bunny::Channel#wait_for_confirms` is a method
+Bunni `0.9.0.pre3` supports publisher confirms. Publisher confirms are enabled per channel,
+using the `Bunni::Channel#confirm_select` method. `Bunni::Channel#wait_for_confirms` is a method
 that blocks current thread until the client gets confirmations for all unconfirmed published
 messages:
 
@@ -1347,8 +1347,8 @@ It is now possible to register a consumer as an object instead
 of a block. Consumers that are class instances support cancellation
 notifications (e.g. when a queue they're registered with is deleted).
 
-To support this, Bunny introduces two new methods: `Bunny::Channel#basic_consume_with`
-and `Bunny::Queue#subscribe_with`, that operate on consumer objects. Objects are
+To support this, Bunni introduces two new methods: `Bunni::Channel#basic_consume_with`
+and `Bunni::Queue#subscribe_with`, that operate on consumer objects. Objects are
 supposed to respond to three selectors:
 
  * `:handle_delivery` with 3 arguments
@@ -1358,7 +1358,7 @@ supposed to respond to three selectors:
 An example:
 
 ``` ruby
-class ExampleConsumer < Bunny::Consumer
+class ExampleConsumer < Bunni::Consumer
   def cancelled?
     @cancelled
   end
@@ -1385,54 +1385,54 @@ ch2.basic_consume_with.(consumer)
 
 ### RABBITMQ_URL ENV variable support
 
-If `RABBITMQ_URL` environment variable is set, Bunny will assume
+If `RABBITMQ_URL` environment variable is set, Bunni will assume
 it contains a valid amqp URI string and will use it. This is convenient
 with some PaaS technologies such as Heroku.
 
 
-## Changes between Bunny 0.9.0.pre1 and 0.9.0.pre2
+## Changes between Bunni 0.9.0.pre1 and 0.9.0.pre2
 
-### Change Bunny::Queue#pop default for :ack to false
+### Change Bunni::Queue#pop default for :ack to false
 
 It makes more sense for beginners that way.
 
 
-### Bunny::Queue#subscribe now support the new :block option
+### Bunni::Queue#subscribe now support the new :block option
 
-`Bunny::Queue#subscribe` support the new `:block` option
+`Bunni::Queue#subscribe` support the new `:block` option
 (a boolean).
 
 It controls whether the current thread will be blocked
-by `Bunny::Queue#subscribe`.
+by `Bunni::Queue#subscribe`.
 
 
-### Bunny::Exchange#publish now supports :key again
+### Bunni::Exchange#publish now supports :key again
 
-`Bunny::Exchange#publish` now supports `:key` as an alias for
+`Bunni::Exchange#publish` now supports `:key` as an alias for
 `:routing_key`.
 
 
-### Bunny::Session#queue et al.
+### Bunni::Session#queue et al.
 
-`Bunny::Session#queue`, `Bunny::Session#direct`, `Bunny::Session#fanout`, `Bunny::Session#topic`,
-and `Bunny::Session#headers` were added to simplify migration. They all delegate to their respective
-`Bunny::Channel` methods on the default channel every connection has.
+`Bunni::Session#queue`, `Bunni::Session#direct`, `Bunni::Session#fanout`, `Bunni::Session#topic`,
+and `Bunni::Session#headers` were added to simplify migration. They all delegate to their respective
+`Bunni::Channel` methods on the default channel every connection has.
 
 
-### Bunny::Channel#exchange, Bunny::Session#exchange
+### Bunni::Channel#exchange, Bunni::Session#exchange
 
-`Bunny::Channel#exchange` and `Bunny::Session#exchange` were added to simplify
+`Bunni::Channel#exchange` and `Bunni::Session#exchange` were added to simplify
 migration:
 
 ``` ruby
-b = Bunny.new
+b = Bunni.new
 b.start
 
 # uses default connection channel
 x = b.exchange("logs.events", :topic)
 ```
 
-### Bunny::Queue#subscribe now properly takes 3 arguments
+### Bunni::Queue#subscribe now properly takes 3 arguments
 
 ``` ruby
 q.subscribe(:exclusive => false, :ack => false) do |delivery_info, properties, payload|
@@ -1442,15 +1442,15 @@ end
 
 
 
-## Changes between Bunny 0.8.x and 0.9.0.pre1
+## Changes between Bunni 0.8.x and 0.9.0.pre1
 
-### New convenience functions: Bunny::Channel#fanout, Bunny::Channel#topic
+### New convenience functions: Bunni::Channel#fanout, Bunni::Channel#topic
 
-`Bunny::Channel#fanout`, `Bunny::Channel#topic`, `Bunny::Channel#direct`, `Bunny::Channel#headers`,
-and`Bunny::Channel#default_exchange` are new convenience methods to instantiate exchanges:
+`Bunni::Channel#fanout`, `Bunni::Channel#topic`, `Bunni::Channel#direct`, `Bunni::Channel#headers`,
+and`Bunni::Channel#default_exchange` are new convenience methods to instantiate exchanges:
 
 ``` ruby
-conn = Bunny.new
+conn = Bunni.new
 conn.start
 
 ch = conn.create_channel
@@ -1458,9 +1458,9 @@ x  = ch.fanout("logging.events", :durable => true)
 ```
 
 
-### Bunny::Queue#pop and consumer handlers (Bunny::Queue#subscribe) signatures have changed
+### Bunni::Queue#pop and consumer handlers (Bunni::Queue#subscribe) signatures have changed
 
-Bunny `< 0.9.x` example:
+Bunni `< 0.9.x` example:
 
 ``` ruby
 h = queue.pop
@@ -1468,7 +1468,7 @@ h = queue.pop
 puts h[:delivery_info], h[:header], h[:payload]
 ```
 
-Bunny `>= 0.9.x` example:
+Bunni `>= 0.9.x` example:
 
 ``` ruby
 delivery_info, properties, payload = queue.pop
@@ -1485,9 +1485,9 @@ but not hash destructuring, like, say, Clojure does.
 In addition we return nil for content when it should be nil
 (basic.get-empty) and unify these arguments betwee
 
- * Bunny::Queue#pop
+ * Bunni::Queue#pop
 
- * Consumer (Bunny::Queue#subscribe, etc) handlers
+ * Consumer (Bunni::Queue#subscribe, etc) handlers
 
  * Returned message handlers
 
@@ -1495,15 +1495,15 @@ The unification moment was the driving factor.
 
 
 
-### Bunny::Client#write now raises Bunny::ConnectionError
+### Bunni::Client#write now raises Bunni::ConnectionError
 
-Bunny::Client#write now raises `Bunny::ConnectionError` instead of `Bunny::ServerDownError` when network
+Bunni::Client#write now raises `Bunni::ConnectionError` instead of `Bunni::ServerDownError` when network
 I/O operations fail.
 
 
-### Bunny::Client.create_channel now uses a bitset-based allocator
+### Bunni::Client.create_channel now uses a bitset-based allocator
 
-Instead of reusing channel instances, `Bunny::Client.create_channel` now opens new channels and
+Instead of reusing channel instances, `Bunni::Client.create_channel` now opens new channels and
 uses bitset-based allocator to keep track of used channel ids. This avoids situations when
 channels are reused or shared without developer's explicit intent but also work well for
 long running applications that aggressively open and release channels.
@@ -1511,6 +1511,6 @@ long running applications that aggressively open and release channels.
 This is also how amqp gem and RabbitMQ Java client manage channel ids.
 
 
-### Bunny::ServerDownError is now Bunny::TCPConnectionFailed
+### Bunni::ServerDownError is now Bunni::TCPConnectionFailed
 
-`Bunny::ServerDownError` is now an alias for `Bunny::TCPConnectionFailed`
+`Bunni::ServerDownError` is now an alias for `Bunni::TCPConnectionFailed`

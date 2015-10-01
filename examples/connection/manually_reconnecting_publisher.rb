@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
-require 'bunny'
+require 'bunni'
 
 Bundler.setup
 
 begin
-  connection = Bunny.new(:automatically_recover => false)
+  connection = Bunni.new(:automatically_recover => false)
   connection.start
 
   ch = connection.channel
@@ -18,7 +18,7 @@ begin
 
     sleep 3.0
   end
-rescue Bunny::NetworkFailure => e
+rescue Bunni::NetworkFailure => e
   ch.maybe_kill_consumer_work_pool!
 
   sleep 10

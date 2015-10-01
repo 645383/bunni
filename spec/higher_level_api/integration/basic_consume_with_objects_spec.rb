@@ -1,9 +1,9 @@
 require "spec_helper"
 require "set"
 
-describe Bunny::Queue, "#subscribe_with" do
+describe Bunni::Queue, "#subscribe_with" do
   let(:connection) do
-    c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     c.start
     c
   end
@@ -13,7 +13,7 @@ describe Bunny::Queue, "#subscribe_with" do
   end
 
   context "with explicit acknowledgements mode" do
-    class ExampleConsumer < Bunny::Consumer
+    class ExampleConsumer < Bunni::Consumer
       def cancelled?
         @cancelled
       end
@@ -32,8 +32,8 @@ describe Bunny::Queue, "#subscribe_with" do
     it "requeues messages on channel closure" do
       ch1  = connection.create_channel
       ch2  = connection.create_channel
-      q1   = ch1.queue("bunny.tests.consumer_object1", :exclusive => true)
-      q2   = ch2.queue("bunny.tests.consumer_object1", :exclusive => true)
+      q1   = ch1.queue("bunni.tests.consumer_object1", :exclusive => true)
+      q2   = ch2.queue("bunni.tests.consumer_object1", :exclusive => true)
       ec   = ExampleConsumer.new(ch1, q1, "", false)
       x    = ch2.default_exchange
 

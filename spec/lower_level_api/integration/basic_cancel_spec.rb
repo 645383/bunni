@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Bunny::Channel, "#basic_cancel" do
+describe Bunni::Channel, "#basic_cancel" do
   before(:all) do
-    @connection = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    @connection = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     @connection.start
   end
 
@@ -10,7 +10,7 @@ describe Bunny::Channel, "#basic_cancel" do
     @connection.close if @connection.open?
   end
 
-  let(:queue_name) { "bunny.queues.#{rand}" }
+  let(:queue_name) { "bunni.queues.#{rand}" }
 
   it "returns basic.cancel-ok" do
     ch = @connection.create_channel
@@ -26,7 +26,7 @@ describe Bunny::Channel, "#basic_cancel" do
   end
 
   context "when the given consumer tag is valid" do
-    let(:queue_name) { "bunny.basic.cancel.queue#{rand}" }
+    let(:queue_name) { "bunni.basic.cancel.queue#{rand}" }
 
     it "cancels the consumer" do
       delivered_data = []

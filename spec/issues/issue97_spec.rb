@@ -2,9 +2,9 @@ require "spec_helper"
 
 describe "Message framing implementation" do
     before :all do
-    @connection = Bunny.new(:user     => "bunny_gem",
-                  :password => "bunny_password",
-                  :vhost    => "bunny_testbed",
+    @connection = Bunni.new(:user     => "bunni_gem",
+                  :password => "bunni_password",
+                  :vhost    => "bunni_testbed",
                   :port     => ENV.fetch("RABBITMQ_PORT", 5672))
     @connection.start
   end

@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Bunny::Exchange do
+describe Bunni::Exchange do
   let(:connection) do
-    c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     c.start
     c
   end
@@ -14,8 +14,8 @@ describe Bunny::Exchange do
   it "binds two existing exchanges" do
     ch          = connection.create_channel
 
-    source      = ch.fanout("bunny.exchanges.source", :auto_delete => true)
-    destination = ch.fanout("bunny.exchanges.destination", :auto_delete => true)
+    source      = ch.fanout("bunni.exchanges.source", :auto_delete => true)
+    destination = ch.fanout("bunni.exchanges.destination", :auto_delete => true)
 
     queue       = ch.queue("", :exclusive => true)
     queue.bind(destination)

@@ -1,11 +1,11 @@
 require "spec_helper"
 
 unless ENV["CI"]
-  describe Bunny::Queue, "#subscribe" do
+  describe Bunni::Queue, "#subscribe" do
     before :all do
-      @connection1 = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+      @connection1 = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
       @connection1.start
-      @connection2 = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+      @connection2 = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
       @connection2.start
     end
 

@@ -6,7 +6,7 @@ require "set"
 require "thread"
 require "benchmark"
 
-require "bunny/concurrent/synchronized_sorted_set"
+require "bunni/concurrent/synchronized_sorted_set"
 
 puts
 puts "-" * 80

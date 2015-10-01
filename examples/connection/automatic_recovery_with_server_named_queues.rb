@@ -6,13 +6,13 @@ Bundler.setup
 
 $:.unshift(File.expand_path("../../../lib", __FILE__))
 
-require 'bunny'
+require 'bunni'
 
-conn = Bunny.new(:heartbeat_interval => 8)
+conn = Bunni.new(:heartbeat_interval => 8)
 conn.start
 
 ch = conn.create_channel
-x  = ch.topic("bunny.examples.recovery.topic", :durable => false)
+x  = ch.topic("bunni.examples.recovery.topic", :durable => false)
 q  = ch.queue("", :durable => false)
 
 q.bind(x, :routing_key => "abc").bind(x, :routing_key => "def")
@@ -30,6 +30,6 @@ loop do
     x.publish(rand.to_s, :routing_key => rk)
   # happens when a message is published before the connection
   # is recovered
-  rescue Bunny::ConnectionClosedError => e
+  rescue Bunni::ConnectionClosedError => e
   end
 end

@@ -1,14 +1,14 @@
 require "spec_helper"
 
-describe Bunny::Session do
+describe Bunni::Session do
   context "with unreachable host" do
-    it "raises Bunny::TCPConnectionFailed" do
+    it "raises Bunni::TCPConnectionFailed" do
       begin
-        conn = Bunny.new(:hostname => "192.192.192.192")
+        conn = Bunni.new(:hostname => "192.192.192.192")
         conn.start
 
         fail "expected 192.192.192.192 to be unreachable"
-      rescue Bunny::TCPConnectionFailed => e
+      rescue Bunni::TCPConnectionFailed => e
       end
     end
   end

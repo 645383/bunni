@@ -4,9 +4,9 @@ require "spec_helper"
 unless ENV["CI"]
   describe "Message framing implementation" do
     let(:connection) do
-      c = Bunny.new(:user     => "bunny_gem",
-        :password => "bunny_password",
-        :vhost    => "bunny_testbed",
+      c = Bunni.new(:user     => "bunni_gem",
+        :password => "bunni_password",
+        :vhost    => "bunni_testbed",
         :port     => ENV.fetch("RABBITMQ_PORT", 5672))
       c.start
       c

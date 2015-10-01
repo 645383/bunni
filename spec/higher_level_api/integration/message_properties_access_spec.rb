@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Bunny::Queue, "#subscribe" do
+describe Bunni::Queue, "#subscribe" do
   let(:connection) do
-    c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     c.start
     c
   end
@@ -11,7 +11,7 @@ describe Bunny::Queue, "#subscribe" do
     connection.close if connection.open?
   end
 
-  let(:queue_name) { "bunny.basic_consume#{rand}" }
+  let(:queue_name) { "bunni.basic_consume#{rand}" }
 
   it "provides delivery handler access to message properties" do
     @now     = Time.now
@@ -33,7 +33,7 @@ describe Bunny::Queue, "#subscribe" do
     x  = ch.default_exchange
     x.publish("hello",
               :routing_key => queue_name,
-              :app_id      => "bunny.example",
+              :app_id      => "bunni.example",
               :priority    => 8,
               :type        => "kinda.checkin",
               # headers table keys can be anything
@@ -81,7 +81,7 @@ describe Bunny::Queue, "#subscribe" do
     expect(metadata.reply_to).to eq "a.sender"
     expect(metadata.correlation_id).to eq "r-1"
     expect(metadata.message_id).to eq "m-1"
-    expect(metadata.app_id).to eq "bunny.example"
+    expect(metadata.app_id).to eq "bunni.example"
 
     expect(envelope.consumer_tag).not_to be_nil
     expect(envelope.consumer_tag).not_to be_empty

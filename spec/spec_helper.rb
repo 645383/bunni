@@ -7,7 +7,7 @@ Bundler.setup(:default, :test)
 
 
 require "effin_utf8"
-require "bunny"
+require "bunni"
 require "rabbitmq/http/client"
 
 

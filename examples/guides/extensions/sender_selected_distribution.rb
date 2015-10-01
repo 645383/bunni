@@ -2,16 +2,16 @@
 # encoding: utf-8
 
 require "rubygems"
-require "bunny"
+require "bunni"
 
 puts "=> Demonstrating sender-selected distribution"
 puts
 
-conn = Bunny.new
+conn = Bunni.new
 conn.start
 
 ch   = conn.create_channel
-x    = ch.direct("bunny.examples.ssd.exchange")
+x    = ch.direct("bunni.examples.ssd.exchange")
 q1   = ch.queue("", :exclusive => true).bind(x, :routing_key => "one")
 q2   = ch.queue("", :exclusive => true).bind(x, :routing_key => "two")
 q3   = ch.queue("", :exclusive => true).bind(x, :routing_key => "three")

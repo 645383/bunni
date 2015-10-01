@@ -1,9 +1,9 @@
 require "spec_helper"
 
-require "bunny/concurrent/atomic_fixnum"
-require "bunny/versioned_delivery_tag"
+require "bunni/concurrent/atomic_fixnum"
+require "bunni/versioned_delivery_tag"
 
-describe Bunny::VersionedDeliveryTag, "#stale?" do
+describe Bunni::VersionedDeliveryTag, "#stale?" do
   subject { described_class.new(2, 1) }
 
   context "when delivery tag version < provided version" do

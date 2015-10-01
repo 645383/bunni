@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Rapidly opening and closing lots of channels" do
   before :all do
-    @connection = Bunny.new(:automatic_recovery => false).tap do |c|
+    @connection = Bunni.new(:automatic_recovery => false).tap do |c|
       c.start
     end
   end
@@ -33,7 +33,7 @@ describe "Rapidly opening and closing lots of channels" do
       # Because Ruby's mutexes are not re-entrant, it will raise a ThreadError.
       #
       # But this already demonstrates that within these platform constraints,
-      # Bunny is safe to use in such scenarios.
+      # Bunni is safe to use in such scenarios.
       let(:n) { 20 }
 
       it "works correctly" do
@@ -69,7 +69,7 @@ describe "Rapidly opening and closing lots of channels" do
           t = Thread.new do
             3.times do
               ch = @connection.create_channel
-              x  = ch.topic('bunny.stress.topics.t2', :durable => false)
+              x  = ch.topic('bunni.stress.topics.t2', :durable => false)
               ch.close
             end
           end

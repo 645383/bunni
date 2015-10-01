@@ -1,11 +1,11 @@
 require "spec_helper"
 
 unless ENV["CI"]
-  describe Bunny::Channel, "#basic_publish" do
+  describe Bunni::Channel, "#basic_publish" do
     before :all do
-      @connection = Bunny.new(:user     => "bunny_gem",
-                              :password => "bunny_password",
-                              :vhost    => "bunny_testbed",
+      @connection = Bunni.new(:user     => "bunni_gem",
+                              :password => "bunni_password",
+                              :vhost    => "bunni_testbed",
                               :write_timeout => 0,
                               :read_timeout => 0)
       @connection.start

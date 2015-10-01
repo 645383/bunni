@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Bunny::Channel, "#basic_consume" do
+describe Bunni::Channel, "#basic_consume" do
   before(:all) do
-    @connection = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    @connection = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     @connection.start
   end
 
@@ -32,7 +32,7 @@ describe Bunny::Channel, "#basic_consume" do
   end
 
   context "with automatic acknowledgement mode" do
-    let(:queue_name) { "bunny.basic_consume#{rand}" }
+    let(:queue_name) { "bunni.basic_consume#{rand}" }
 
     it "causes messages to be automatically removed from the queue after delivery" do
       delivered_keys = []
@@ -64,7 +64,7 @@ describe Bunny::Channel, "#basic_consume" do
   end
 
   context "with manual acknowledgement mode" do
-    let(:queue_name) { "bunny.basic_consume#{rand}" }
+    let(:queue_name) { "bunni.basic_consume#{rand}" }
 
     it "waits for an explicit acknowledgement" do
       delivered_keys = []

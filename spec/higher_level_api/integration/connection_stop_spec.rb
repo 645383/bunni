@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Bunny::Session do
+describe Bunni::Session do
   let(:http_client) { RabbitMQ::HTTP::Client.new("http://127.0.0.1:15672") }
 
   def close_connection(client_port)
@@ -16,7 +16,7 @@ describe Bunny::Session do
   end
 
   it "can be closed" do
-    c  = Bunny.new(:automatically_recover => false)
+    c  = Bunni.new(:automatically_recover => false)
     c.start
     ch = c.create_channel
 
@@ -26,7 +26,7 @@ describe Bunny::Session do
   end
 
   it "can be closed twice (Session#close is idempotent)" do
-    c  = Bunny.new(:automatically_recover => false)
+    c  = Bunni.new(:automatically_recover => false)
     c.start
     ch = c.create_channel
 
@@ -39,7 +39,7 @@ describe Bunny::Session do
 
   describe "in a single threaded mode" do
     it "can be closed" do
-      c  = Bunny.new(:automatically_recover => false, :threaded => false)
+      c  = Bunni.new(:automatically_recover => false, :threaded => false)
       c.start
       ch = c.create_channel
 
@@ -52,7 +52,7 @@ describe Bunny::Session do
 
   describe "that recovers from connection.close" do
     it "can be closed" do
-      c  = Bunny.new(:automatically_recover => false, :recover_from_connection_close => true, :network_recovery_interval => 0.2)
+      c  = Bunni.new(:automatically_recover => false, :recover_from_connection_close => true, :network_recovery_interval => 0.2)
       c.start
       ch = c.create_channel
 

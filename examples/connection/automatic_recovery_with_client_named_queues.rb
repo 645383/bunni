@@ -6,14 +6,14 @@ Bundler.setup
 
 $:.unshift(File.expand_path("../../../lib", __FILE__))
 
-require 'bunny'
+require 'bunni'
 
-conn = Bunny.new(:heartbeat_interval => 8)
+conn = Bunni.new(:heartbeat_interval => 8)
 conn.start
 
 ch = conn.create_channel
-x  = ch.topic("bunny.examples.recovery.topic", :durable => false)
-q  = ch.queue("bunny.examples.recovery.client_named_queue1", :durable => false)
+x  = ch.topic("bunni.examples.recovery.topic", :durable => false)
+q  = ch.queue("bunni.examples.recovery.client_named_queue1", :durable => false)
 
 q.bind(x, :routing_key => "abc").bind(x, :routing_key => "def")
 

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "A message" do
   let(:connection) do
-    c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     c.start
     c
   end
@@ -14,7 +14,7 @@ describe "A message" do
   it "is considered to be dead-lettered when it is rejected without requeueing" do
     ch   = connection.create_channel
     x    = ch.fanout("amq.fanout")
-    dlx  = ch.fanout("bunny.tests.dlx.exchange")
+    dlx  = ch.fanout("bunni.tests.dlx.exchange")
     q    = ch.queue("", :exclusive => true, :arguments => {"x-dead-letter-exchange" => dlx.name}).bind(x)
     # dead letter queue
     dlq  = ch.queue("", :exclusive => true).bind(dlx)
@@ -40,7 +40,7 @@ describe "A message" do
   it "is considered to be dead-lettered when it expires" do
     ch   = connection.create_channel
     x    = ch.fanout("amq.fanout")
-    dlx  = ch.fanout("bunny.tests.dlx.exchange")
+    dlx  = ch.fanout("bunni.tests.dlx.exchange")
     q    = ch.queue("", :exclusive => true, :arguments => {"x-dead-letter-exchange" => dlx.name, "x-message-ttl" => 100}).bind(x)
     # dead letter queue
     dlq  = ch.queue("", :exclusive => true).bind(dlx)
@@ -57,7 +57,7 @@ describe "A message" do
   it "carries the x-death header" do
     ch   = connection.create_channel
     x    = ch.fanout("amq.fanout")
-    dlx  = ch.fanout("bunny.tests.dlx.exchange")
+    dlx  = ch.fanout("bunni.tests.dlx.exchange")
     q    = ch.queue("", :exclusive => true, :arguments => {"x-dead-letter-exchange" => dlx.name, "x-message-ttl" => 100}).bind(x)
     # dead letter queue
     dlq  = ch.queue("", :exclusive => true).bind(dlx)

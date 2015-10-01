@@ -2,18 +2,18 @@
 # encoding: utf-8
 
 require "rubygems"
-require "bunny"
+require "bunni"
 
 puts "=> Subscribing for messages using explicit acknowledgements model"
 puts
 
-connection1 = Bunny.new
+connection1 = Bunni.new
 connection1.start
 
-connection2 = Bunny.new
+connection2 = Bunni.new
 connection2.start
 
-connection3 = Bunny.new
+connection3 = Bunni.new
 connection3.start
 
 ch1 = connection1.create_channel
@@ -26,7 +26,7 @@ ch3 = connection3.create_channel
 ch3.prefetch(1)
 
 x   = ch3.direct("amq.direct")
-q1  = ch1.queue("bunny.examples.acknowledgements.explicit", :auto_delete => false)
+q1  = ch1.queue("bunni.examples.acknowledgements.explicit", :auto_delete => false)
 q1.purge
 
 q1.bind(x).subscribe(:manual_ack => true, :block => false) do |delivery_info, properties, payload|
@@ -35,7 +35,7 @@ q1.bind(x).subscribe(:manual_ack => true, :block => false) do |delivery_info, pr
 
   # acknowledge some messages, they will be removed from the queue
   if rand > 0.5
-    # FYI: there is a shortcut, Bunny::Channel.ack
+    # FYI: there is a shortcut, Bunni::Channel.ack
     ch1.acknowledge(delivery_info.delivery_tag, false)
     puts "[consumer1] Got message ##{properties.headers['i']}, redelivered?: #{delivery_info.redelivered?}, ack-ed"
   else
@@ -45,7 +45,7 @@ q1.bind(x).subscribe(:manual_ack => true, :block => false) do |delivery_info, pr
   end
 end
 
-q2   = ch2.queue("bunny.examples.acknowledgements.explicit", :auto_delete => false)
+q2   = ch2.queue("bunni.examples.acknowledgements.explicit", :auto_delete => false)
 q2.bind(x).subscribe(:manual_ack => true, :block => false) do |delivery_info, properties, payload|
   # do some work
   sleep(0.2)

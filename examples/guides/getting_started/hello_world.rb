@@ -2,13 +2,13 @@
 # encoding: utf-8
 
 require "rubygems"
-require "bunny"
+require "bunni"
 
-conn = Bunny.new
+conn = Bunni.new
 conn.start
 
 ch = conn.create_channel
-q  = ch.queue("bunny.examples.hello_world", :auto_delete => true)
+q  = ch.queue("bunni.examples.hello_world", :auto_delete => true)
 
 q.subscribe do |delivery_info, properties, payload|
   puts "Received #{payload}"

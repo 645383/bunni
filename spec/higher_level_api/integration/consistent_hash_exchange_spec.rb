@@ -4,7 +4,7 @@ require "spec_helper"
 unless ENV["CI"]
   describe "x-consistent-hash exchange" do
     let(:connection) do
-      c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+      c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
       c.start
       c
     end
@@ -24,7 +24,7 @@ unless ENV["CI"]
       # enable it with
       #
       # $ [sudo] rabbitmq-plugins enable rabbitmq_consistent_hash_exchange
-      x    = ch.exchange("bunny.stress.concurrent.consumers", :type => "x-consistent-hash", :durable => true)
+      x    = ch.exchange("bunni.stress.concurrent.consumers", :type => "x-consistent-hash", :durable => true)
 
       qs = []
 

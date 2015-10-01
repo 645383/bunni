@@ -1,7 +1,7 @@
 require "spec_helper"
-require "bunny/concurrent/condition"
+require "bunni/concurrent/condition"
 
-describe Bunny::Concurrent::Condition do
+describe Bunni::Concurrent::Condition do
 
   describe "#wait" do
     100.times do |i|

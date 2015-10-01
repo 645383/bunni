@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Sender-selected distribution" do
   let(:connection) do
-    c = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    c = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     c.start
     c
   end
@@ -13,7 +13,7 @@ describe "Sender-selected distribution" do
 
   it "lets publishers specify additional routing keys using CC and BCC headers" do
     ch   = connection.create_channel
-    x    = ch.direct("bunny.tests.ssd.exchange")
+    x    = ch.direct("bunni.tests.ssd.exchange")
     q1   = ch.queue("", :exclusive => true).bind(x, :routing_key => "one")
     q2   = ch.queue("", :exclusive => true).bind(x, :routing_key => "two")
     q3   = ch.queue("", :exclusive => true).bind(x, :routing_key => "three")

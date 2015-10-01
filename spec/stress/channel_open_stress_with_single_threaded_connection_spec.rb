@@ -3,7 +3,7 @@ require "spec_helper"
 unless ENV["CI"]
   describe "Rapidly opening and closing lots of channels on a non-threaded connection" do
     before :all do
-      @connection = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed", :automatic_recovery => false, :threaded => false)
+      @connection = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed", :automatic_recovery => false, :threaded => false)
       @connection.start
     end
 

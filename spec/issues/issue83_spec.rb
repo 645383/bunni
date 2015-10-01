@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Bunny::Channel, "#open" do
+describe Bunni::Channel, "#open" do
   before :all do
-    @connection = Bunny.new(:user => "bunny_gem", :password => "bunny_password", :vhost => "bunny_testbed")
+    @connection = Bunni.new(:user => "bunni_gem", :password => "bunni_password", :vhost => "bunni_testbed")
     @connection.start
   end
 
@@ -15,8 +15,8 @@ describe Bunny::Channel, "#open" do
     ch = @connection.create_channel
 
     begin
-      ch.queue("bunny.tests.does.not.exist", :passive => true)
-    rescue Bunny::NotFound
+      ch.queue("bunni.tests.does.not.exist", :passive => true)
+    rescue Bunni::NotFound
       # expected
     end
 
@@ -24,7 +24,7 @@ describe Bunny::Channel, "#open" do
     ch.open
 
     # should not raise
-    q = ch.queue("bunny.tests.my.queue")
+    q = ch.queue("bunni.tests.my.queue")
     q.delete
   end
 end
